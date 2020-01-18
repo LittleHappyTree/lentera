@@ -53,18 +53,16 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="#intro">Home</a></li>
-          <li><a href="#speakers">Catalog</a></li>
-          <li><a href="">FAQ</a></li>
-          <li><a href="#schedule">Terms & Conditions</a></li>
-          <li><a href="#venue">Contact</a></li>
+          <?php foreach ($menu as $key => $value) { ?>
+          <li class="<?=$value["active"]?>"><a href="<?=$value["url"]?>"><?=$value["menu"]?></a></li>
+          <?php } ?>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
 
   <?php $this->view($page); ?>    
-  
+
   <!--==========================
     Footer
   ============================-->
