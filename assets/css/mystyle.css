@@ -1,0 +1,127 @@
+.btn-trans {
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    transition: 0.5s;
+    line-height: 1;
+    margin-top: 2px;
+    color: #fff;
+    background-color: transparent;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    border: 2px solid #f82249;
+}
+
+.btn-trans:hover {
+    background: #f82249;
+    color: #fff;
+}
+
+#about .form input {
+    padding: 10px 14px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+}
+
+#speakers .hotel {
+    border: 1px solid #e0e5fa;
+    background: #fff;
+    margin-bottom: 30px;
+}
+
+#speakers .hotel:hover .hotel-img img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#speakers .hotel-img {
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+#speakers .center {
+    text-align: center;
+}
+
+#speakers .hotel-img img {
+    transition: 0.3s ease-in-out;
+}
+
+#speakers h3 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 5px;
+    padding: 0 20px;
+}
+
+#speakers h3 small {
+    font-style: italic;
+    font-size: 14px;
+}
+
+#speakers a {
+    color: #152b79;
+}
+
+#speakers a:hover {
+    color: #f82249;
+}
+
+#speakers .stars {
+    padding: 0 20px;
+    margin-bottom: 5px;
+}
+
+#speakers .stars i {
+    color: #ffc31d;
+}
+
+#speakers .hotel p {
+    padding: 0 20px;
+    margin-bottom: 20px;
+    color: #060c22;
+    font-style: italic;
+    font-size: 15px;
+}
+
+#speakers .button {
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+#speakers button[type="button"] {
+    background: #f82249;
+    border: 0;
+    padding: 6px 22px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+    cursor: pointer;
+}
+  
+#speakers button[type="button"]:hover {
+    background: #e0072f;
+}
+
+#speakers-details .book {
+    background: #f82249;
+    border: 0;
+    padding: 6px 22px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+#speakers-details .book:hover {
+    background: #e0072f;
+}
