@@ -3,8 +3,8 @@
   ============================-->
   <section id="intro">
     <div class="intro-container wow fadeIn">
-      <h1 class="mb-4 pb-0"><span>Explore</span> Bali<br>with Our Best Ride</h1>
-      <p class="mb-4 pb-0">Lentera Travel provides car and motorcycle for rent while you are in Bali.</p>
+      <h1 class="mb-4 pb-0">Explore Bali<br>with Our <span>Best</span> Ride</h1>
+      <p class="mb-4 pb-0">Lentera Travel provides car and motorcycle for rent while you are in Bali. </p>
       <a href="#about" class="about-btn scrollto">Let's Book a Ride</a>
     </div>
   </section>
@@ -50,47 +50,25 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="hotel">
-              <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/vario.png" alt="Hotel 1" class="img-fluid">
-              </div>
-              <h3><a href="<?=base_url()?>en/fleet/detail/motorcycle/1">Honda Vario 150cc</a><br><small>Black - 2019</small></h3>
-              <p>IDR 150.000 / day</p>
-              <div class="button">
-                <button type="button">Book</button>
-              </div>
-            </div>
-          </div>
 
+          <?php foreach ($motor as $value): ?>
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/pcx.png" alt="Hotel 1" class="img-fluid">
+                <img src="<?=base_url()?>assets/img/motor/<?=$value->img?>" class="img-fluid">
               </div>
-              <h3><a href="<?=base_url()?>en/fleet/detail/motorcycle/1">Honda PCX 155cc</a><br><small>Red - 2019</small></h3>
-              <p>IDR 180.000 / day</p>
+              <h3><a href="<?=base_url()?>en/fleet/detail/<?=$value->kind?>/<?=$value->id?>"><?=$value->type_name?> <?=$value->vehicle_series?> </a><br><small><?=$value->silinder?>CC &bull; <?=$value->year?> &bull; <?=$value->capacity?> seat</small></h3>
+              <p>Start from IDR <?=number_format($value->start_price,0,',','.')?> / day</p>
               <div class="button">
                 <button type="button">Book</button>
               </div>
             </div>
           </div>
+        <?php endforeach ?>
 
-          <div class="col-lg-4 col-md-6">
-            <div class="hotel">
-              <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/nmax.png" alt="Hotel 1" class="img-fluid">
-              </div>
-              <h3><a href="<?=base_url()?>en/fleet/detail/motorcycle/1">Yamaha NMAX 155cc</a><br><small>Black - 2019</small></h3>
-              <p>IDR 150.000 / day</p>
-              <div class="button">
-                <button type="button">Book</button>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="center">
-          <button type="button">More Motorcycles</button>
+          <button onclick="location.href='<?=base_url()?>en/fleet/motorcycle'" type="button">More Motorcycles</button>
         </div>
         <br>
         <div class="section-header">
@@ -98,47 +76,23 @@
         </div>
 
         <div class="row">
+          <?php foreach ($mobil as $value): ?>
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/avanza.png" alt="Hotel 1" class="img-fluid">
+                <img src="<?=base_url()?>assets/img/motor/<?=$value->img?>" class="img-fluid">
               </div>
-              <h3><a href="<?=base_url()?>en/fleet/detail/car/1">Toyota Avanza</a><br><small>Black - 2019</small></h3>
-              <p>IDR 150.000 / day</p>
+              <h3><a href="<?=base_url()?>en/fleet/detail/<?=$value->kind?>/<?=$value->id?>"><?=$value->type_name?> <?=$value->vehicle_series?> </a><br><small><?=$value->silinder?>cc &bull; <?=$value->year?> &bull; <?=$value->capacity?> seat</small></h3>
+              <p>Start from IDR <?=number_format($value->start_price)?> / day</p>
               <div class="button">
                 <button type="button">Book</button>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="hotel">
-              <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/xenia.png" alt="Hotel 1" class="img-fluid">
-              </div>
-              <h3><a href="<?=base_url()?>en/fleet/detail/car/1">Daihatsu Xenia</a><br><small>Red - 2019</small></h3>
-              <p>IDR 180.000 / day</p>
-              <div class="button">
-                <button type="button">Book</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="hotel">
-              <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/jazz.png" alt="Hotel 1" class="img-fluid">
-              </div>
-              <h3><a href="<?=base_url()?>en/fleet/detail/car/1">Honda Jazz</a><br><small>Black - 2019</small></h3>
-              <p>IDR 150.000 / day</p>
-              <div class="button">
-                <button type="button">Book</button>
-              </div>
-            </div>
-          </div>
+        <?php endforeach ?>
         </div>
         <div class="center">
-          <button type="button">More Cars</button>
+          <button onclick="location.href='<?=base_url()?>en/fleet/car'" type="button">More Cars</button>
         </div>
 
       </div>

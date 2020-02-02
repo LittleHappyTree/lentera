@@ -21,6 +21,14 @@ class En extends CI_Controller {
 	function index(){	
 		$data['header'] = '';
 		$data['menu'] = $this->get_menu('Y','home');
+		for ($i = 0; $i < 2; $i++) {
+			$sql = "SELECT * FROM vvehicle_start_price WHERE kind = ? LIMIT 3";
+			if ($i==0) {
+				$data['motor'] = $this->models->openquery($sql,array('M'));
+			} else {
+				$data['mobil'] = $this->models->openquery($sql,array('C'));	
+			}
+		}
 		$data['page'] = 'home';
 		$this->load->view('frame',$data);
 	}
@@ -28,10 +36,28 @@ class En extends CI_Controller {
 	function fleet($detail='',$type='',$id=''){
 		$data['header'] = 'header-fixed';
 		$data['menu'] = $this->get_menu('N','catalog');
-		$data['type'] = ucfirst($type);
+		$data['type'] = ($type=='M') ? 'Motorcycle' : 'Car';
 		if ($detail=='detail') {
+			$sql = "SELECT * FROM vvehicle_start_price WHERE id = ?";
+			$data['load'] = $this->models->openquery($sql,array($id));
+			$sql = "SELECT * FROM tprice WHERE addon_price_id = ? AND vehicle_id = ?";
+			$data['loadmaster'] = $this->models->openquery($sql,array(0,$id));
+			$data['countmaster'] = $this->models->countrows($sql,array(0,$id));
+			$sql = "SELECT DISTINCT vehicle_id, price_name, price, duration FROM tprice WHERE addon_price_id != ? AND vehicle_id = ?";
+			$data['loaddetail'] = $this->models->openquery($sql,array(0,$id));
+			$data['countdetail'] = $this->models->countrows($sql,array(0,$id));
 			$data['page'] = 'fleet/fleet-detail';
 		} else {
+			$sql = "SELECT * FROM vvehicle_start_price WHERE kind = ? ";
+			$data['title'] = $detail;
+			if ($detail=='motorcycle') {
+				$data['vehicle'] = $this->models->openquery($sql,array('M'));
+			} elseif ($detail=='car') {
+				$data['vehicle'] = $this->models->openquery($sql,array('C'));
+			} else {
+				$sql = "SELECT * FROM vvehicle_start_price ";
+				$data['vehicle'] = $this->models->openquery($sql,array(null));	
+			}
 			$data['page'] = 'fleet/fleet';
 		}
 		$this->load->view('frame',$data);

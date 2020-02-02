@@ -791,6 +791,28 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 10px;
 }
 
+#speakers-details .details ul li {
+  color: #112363;
+  font-size: 15px;
+}
+
+#speakers-details .details table {
+  color: #112363;
+  font-size: 15px;
+}
+
+#speakers-details .details table .title-price{
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#speakers-details .details table tr td{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 /*--------------------------------------------------------------
 # Schedule Section
 --------------------------------------------------------------*/

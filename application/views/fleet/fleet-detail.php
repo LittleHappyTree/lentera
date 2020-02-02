@@ -8,40 +8,50 @@
           <h2><?=$type?></h2>
         </div>
 
+        <?php foreach ($load as $value): ?>
         <div class="row">
           <div class="col-md-6">
-            <?php if ($type=='Motorcycle') { ?>
-              <img src="<?=base_url()?>assets/img/motor/vario.png" alt="Speaker 1" class="img-fluid">
-            <?php } else { ?>
-              <img src="<?=base_url()?>assets/img/motor/avanza.png" alt="Speaker 1" class="img-fluid">
-            <?php } ?>
+              <img src="<?=base_url()?>assets/img/motor/<?=$value->img?>" alt="Speaker 1" class="img-fluid">
           </div>
 
           <div class="col-md-6">
             <div class="details">
-              <?php if ($type=='Motorcycle') { ?>
-              <h2>Honda Vario 150cc</h2>
-              <p><i>Black &bull; 2019 &bull; IDR 150.000 / day</i></p>
-              <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
- 
-              <p>Aboriosam inventore dolorem inventore nam est esse. Aperiam voluptatem nisi molestias laborum ut. Porro dignissimos eum. Tempore dolores minus unde est voluptatum incidunt ut aperiam.</p> 
+              <h2><?=$value->type_name?> <?=$value->vehicle_series?></h2>
+              <p><i><?=$value->silinder?>cc &bull; <?=$value->year?> &bull; <?=$value->capacity?> seat</i></p>
+              <p><?=$value->description?></p>
 
-              <p>Et dolore blanditiis officiis non quod id possimus. Optio non commodi alias sint culpa sapiente nihil ipsa magnam. Qui eum alias provident omnis incidunt aut. Eius et officia corrupti omnis error vel quia omnis velit. In qui debitis autem aperiam voluptates unde sunt et facilis.</p>
-              <?php } else { ?>
-              <h2>Toyota Avanza</h2>
-              <p><i>Black &bull; 2019 &bull; IDR 150.000 / day</i></p>
-              <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
- 
-              <p>Aboriosam inventore dolorem inventore nam est esse. Aperiam voluptatem nisi molestias laborum ut. Porro dignissimos eum. Tempore dolores minus unde est voluptatum incidunt ut aperiam.</p> 
-
-              <p>Et dolore blanditiis officiis non quod id possimus. Optio non commodi alias sint culpa sapiente nihil ipsa magnam. Qui eum alias provident omnis incidunt aut. Eius et officia corrupti omnis error vel quia omnis velit. In qui debitis autem aperiam voluptates unde sunt et facilis.</p>
-              <?php } ?>
+              <p>
+                Price List:
+              </p>
+              <table class="table">
+                <tbody>
+                  <?php $i=0; foreach ($loadmaster as $master): ?>
+                  <tr>
+                    <?php if ($i==0): ?>
+                    <td rowspan="<?=$countmaster?>" class="title-price">Option</td>
+                    <?php endif ?>
+                    <td style="line-height: 1"><?=$master->price_name?> <i><small><?=$master->price_description?></small></i> </td>
+                    <td class="text-right" style="line-height: 1">IDR <?=number_format($master->price,0,',','.')?> <small><i>/ <?=$master->duration?> hour</i></small></td>
+                  </tr>
+                  <?php $i++; endforeach ?>
+                  <?php $j=0; foreach ($loaddetail as $detail): ?>
+                  <tr>
+                    <?php if ($j==0): ?>
+                    <td rowspan="<?=$countdetail?>" class="title-price">Additional</td>
+                    <?php endif ?>
+                    <td style="line-height: 1"><?=$detail->price_name?> <i><small><?=$master->price_description?></small></i></td>
+                    <td class="text-right" style="line-height: 1">+ IDR <?=number_format($detail->price,0,',','.')?> <small><i>/ <?=$detail->duration?> hour</i></small></td>
+                  </tr>
+                  <?php $j++; endforeach ?>
+                </tbody>
+              </table>
             </div>
             <br>
             <a href="" class="book">Book Now</a>
           </div>
-          
         </div>
+        <?php endforeach ?>
+
       </div>
 
     </section>
