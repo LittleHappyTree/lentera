@@ -63,6 +63,15 @@ class En extends CI_Controller {
 		$this->load->view('frame',$data);
 	}
 
+	function booking(){
+		$data['header'] = 'header-fixed';
+		$data['menu'] = $this->get_menu('N','booking');
+		$data['page'] = 'booking/booking';
+		$sql = "SELECT * FROM vvehicle_start_price";
+		$data['vehicle'] = $this->models->openquery($sql,null);
+		$this->load->view('frame',$data);
+	}
+
 	function get_menu($ishome='',$active=''){
 		$menu = array(
 			array(

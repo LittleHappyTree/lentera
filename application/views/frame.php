@@ -24,6 +24,7 @@
   <link href="<?=base_url()?>assets/lib/venobox/venobox.css" rel="stylesheet">
   <link href="<?=base_url()?>assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="<?=base_url()?>assets/lib/airdatepicker/css/datepicker.css" rel="stylesheet">
+  <link href="<?=base_url()?>assets/lib/select2/select2.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
   <link href="<?=base_url()?>assets/css/style.css" rel="stylesheet">
@@ -138,10 +139,46 @@
   <script src="<?=base_url()?>assets/lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="<?=base_url()?>assets/lib/airdatepicker/js/datepicker.js"></script>
   <script src="<?=base_url()?>assets/lib/airdatepicker/js/i18n/datepicker.en.js"></script>
+  <script src="<?=base_url()?>assets/lib/select2/select2.js"></script>
 
 
   <!-- Template Main Javascript File -->
   <script src="<?=base_url()?>assets/js/main.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('.selecting').select2();
+      $('.option').select2();
+      $('.datepicker-here').datepicker({
+          minDate: new Date(),
+          autoClose: true
+      });
+      $('.date-book').datepicker({
+          minDate: new Date(),
+          autoClose: true,
+          onHide: function(dp, animationCompleted){
+              if (!animationCompleted) {
+                  var dateA = $('.date-book').val();
+                  var dateB = dateA.split(" ");
+                  var dateC = dateB[0];
+                  var dateD = dateB[2];
+                  var dateF = dateD.split("/");
+                  var dateG = dateC.split("/");
+                  var dateEnd = new Date(dateF[2], dateF[1], dateF[0]);
+                  var dateStart = new Date(dateG[2], dateG[1], dateG[0]);
+                  var diff = new Date(dateEnd - dateStart)/1000/60/60/24;
+                  if (diff < 2) {
+                    $('#alert-text').text('Minimum rent day is 2');
+                    $('#submit-book').attr( "disabled", "disabled" );
+                  } else {
+                    $('#alert-text').empty();
+                    $('#submit-book').attr("disabled", false);
+                  }
+              }
+          }
+      });
+    });
+  </script>
 </body>
 
 </html>
