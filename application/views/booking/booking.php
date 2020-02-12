@@ -61,7 +61,9 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">&nbsp;</label>
               <div class="form-group col-md-6">
-                <div id="map"></div>
+                <div style="max-height: 400px; width: 100%">
+                  <div id="map"></div>
+                </div>
               </div>
             </div>
             <div class="text-center"><button type="submit" id="submit-book">Send Message</button></div>
