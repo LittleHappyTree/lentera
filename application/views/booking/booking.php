@@ -53,7 +53,7 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Location</label>
               <div class="form-group col-md-6">
-                <input type="text" name="pickup" id="pac-input" class="form-control" style="background: #fff" required />
+                <input type="text" name="pickup" id="pac-input" class="form-control" placeholder="Search for Hotel, Airport or Landmark" style="background: #fff" required />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
