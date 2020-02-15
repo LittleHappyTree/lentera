@@ -63,13 +63,32 @@ class En extends CI_Controller {
 		$this->load->view('frame',$data);
 	}
 
-	function booking(){
-		$data['header'] = 'header-fixed';
-		$data['menu'] = $this->get_menu('N','booking');
-		$data['page'] = 'booking/booking';
-		$sql = "SELECT * FROM vvehicle_start_price";
-		$data['vehicle'] = $this->models->openquery($sql,null);
-		$this->load->view('frame',$data);
+	function booking($value=""){
+		if ($value=='process') {
+			$id = $this->input->post('uid');
+			$date = explode(' to ', $this->input->post('date'));
+			$date_start = $this->set_date($date[0]);
+			$date_end = $this->set_date($date[1]);
+			$vehicle = $this->input->post('vehicle');
+			$option = $this->input->post('option');
+			$pickup = $this->input->post('pickup');
+			
+		} else {
+			$data['id'] = uniqid();
+			$data['header'] = 'header-fixed';
+			$data['menu'] = $this->get_menu('N','booking');
+			$data['page'] = 'booking/booking';
+			$sql = "SELECT * FROM vvehicle_start_price";
+			$data['vehicle'] = $this->models->openquery($sql,null);
+			$this->load->view('frame',$data);
+		}
+	}
+
+	function set_date($date=''){
+		if ($date!='') {
+			$date = DateTime::createFromFormat('d/m/Y',$date);
+			return $date->format('Y-m-d');
+		}
 	}
 
 	function get_menu($ishome='',$active=''){

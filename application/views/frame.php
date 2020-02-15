@@ -30,6 +30,8 @@
   <link href="<?=base_url()?>assets/css/style.css" rel="stylesheet">
   <link href="<?=base_url()?>assets/css/mystyle.css" rel="stylesheet">
 
+  <script src="<?=base_url()?>assets/lib/jquery/jquery.min.js"></script>
+  <script src="<?=base_url()?>assets/lib/jquery/jquery.number.js"></script>
   <!-- =======================================================
     Theme Name: TheEvent
     Theme URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
@@ -128,7 +130,6 @@
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <script src="<?=base_url()?>assets/lib/jquery/jquery.min.js"></script>
   <script src="<?=base_url()?>assets/lib/jquery/jquery-migrate.min.js"></script>
   <script src="<?=base_url()?>assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?=base_url()?>assets/lib/easing/easing.min.js"></script>

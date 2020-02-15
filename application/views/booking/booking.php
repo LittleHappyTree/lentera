@@ -9,7 +9,7 @@
         </div>
 
         <div class="form">
-          <form action="" method="post" role="form" class="bookingForm">
+          <form action="<?=base_url()?>en/booking/process" method="post" role="form" class="bookingForm">
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Date</label>
               <div class="form-group col-md-6">
@@ -18,6 +18,8 @@
                 <div class="validation"></div>
               </div>
             </div>
+            <input type="hidden" value="<?=base_url()?>" id="base_url" readonly>
+            <input type="hidden" name="uid" value="<?=$id?>" id="base_url" readonly>
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Vehicle</label>
               <div class="form-group col-md-6">
@@ -45,7 +47,7 @@
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Option</label>
               <div class="form-group col-md-6">
                 <select class="form-control option" name="option" id="option" required>
-                  <option value="">Mazda 2</option>
+                  <option value=""></option>
                 </select>
                 <div class="validation"></div>
               </div>
@@ -53,7 +55,16 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Location</label>
               <div class="form-group col-md-6">
-                <input type="text" name="pickup" id="pac-input" class="form-control" placeholder="Search for Hotel, Airport or Landmark" style="background: #fff" required />
+                <input type="text" name="pickup" id="pac-input" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
+                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
+                <div class="validation"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="staticEmail" class="col-sm-4 col-form-label text-right">Drop Off Location</label>
+              <div class="form-group col-md-6">
+                <input type="checkbox" id="sameas" name="sameas"> Same as Pickup
+                <input type="text" name="dropoff" id="pac-inputs" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
@@ -66,7 +77,7 @@
                 </div>
               </div>
             </div>
-            <div class="text-center"><button type="submit" id="submit-book">Send Message</button></div>
+            <div class="text-center"><button type="submit" id="submit-book">Continue to Contact Details</button></div>
           </form>
         </div>
 
@@ -74,6 +85,28 @@
     </section><!-- #booking -->
 </main>
 <script>
+$( document ).ready(function() {
+  $('#vehicle').on("change",function(){
+    var id = $(this).val();
+    var baseUrl = $('#base_url').val();
+    $.ajax({
+      method: 'POST',
+      url: baseUrl+'ajax/get_option',
+      data: {id: id},
+      async: true,
+      dataType: 'json',
+      success: function(data){
+        var $option = $('#option');
+        $option.empty();
+        for (var i = 0; i < data.length; i++) {
+          $option.append('<option value="'+data[i].id+'">'+data[i].price_name+' - '+data[i].price_description+' - IDR '+$.number(data[i].price,0,',','.')+'/'+data[i].duration+' hour </option>')
+        }
+
+        $option.change();
+      }
+    });
+  });
+});
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {
@@ -85,7 +118,7 @@ function initAutocomplete() {
     });
 
     // Membuat Kotak pencarian terhubung dengan tampilan map
-    var input = document.getElementById('pac-input');
+    var input = document.getElementByClassName('gsearch');
     var searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
