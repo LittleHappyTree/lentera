@@ -63,7 +63,7 @@ class En extends CI_Controller {
 		$this->load->view('frame',$data);
 	}
 
-	function booking($value=""){
+	function booking($value="",$id=""){
 		if ($value=='process') {
 			$id = $this->input->post('uid');
 			$date = explode(' to ', $this->input->post('date'));
@@ -72,7 +72,30 @@ class En extends CI_Controller {
 			$vehicle = $this->input->post('vehicle');
 			$option = $this->input->post('option');
 			$pickup = $this->input->post('pickup');
-			
+			$dropoff = $this->input->post('dropoff');
+			$pickuptime = ltrim($this->input->post('pickuptime'));
+			$dropofftime = ltrim($this->input->post('dropofftime'));
+			$array = array(
+				"id" => md5($id),
+				"date_start" => $date_start,
+				"date_end" => $date_end,
+				"time_start" => $pickuptime,
+				"time_end" => $dropofftime,
+				"loc_pickup" => $pickup,
+				"loc_drop" => $dropoff,
+				"order_type" => 'V',
+				"order_number" => $id,
+				"date_insert" => date('Y-m-d G:i:s')
+			);
+			$this->models->insert('torder',$array);
+			$detail = array(
+				"order_id" => md5($id),
+				"price_id" => $option,
+				"counter"  => '1'
+			);
+			$this->models->insert('torder_detail',$detail);
+		} elseif ($value=='details') {
+			$sql = "SELECT * FROM torder";
 		} else {
 			$data['id'] = uniqid();
 			$data['header'] = 'header-fixed';

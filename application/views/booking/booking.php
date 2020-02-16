@@ -1,3 +1,12 @@
+<style>
+  .only-timepicker .datepicker--nav,
+  .only-timepicker .datepicker--content {
+      display: none;
+  }
+  .only-timepicker .datepicker--time {
+      border-top: none;
+  }
+</style>
 <main id="main" class="main-page">
     <section id="booking" class="section-bg wow fadeInUp">
 
@@ -13,7 +22,7 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Date</label>
               <div class="form-group col-md-6">
-                <input type="text" name="date" class="form-control date-book" id="date" placeholder="Select Date" data-language="en" data-multiple-dates-separator=" to " data-date-format="dd/mm/yyyy" data-range="true" readonly="" style="background: #fff" required />
+                <input type="text" name="date" class="form-control date-book" id="date" placeholder="Select Date" data-language="en" data-multiple-dates-separator=" to " data-date-format="dd/mm/yyyy" data-range="true" readonly="" style="background: #fff" required="true" />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
@@ -61,7 +70,7 @@
               </div>
             </div>
             <div class="form-row">
-              <label for="staticEmail" class="col-sm-4 col-form-label text-right">Drop Off Location</label>
+              <label for="staticEmail" class="col-sm-4 col-form-label text-right">Dropoff Location</label>
               <div class="form-group col-md-6">
                 <input type="checkbox" id="sameas" name="sameas"> Same as Pickup
                 <input type="text" name="dropoff" id="pac-inputs" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
@@ -70,13 +79,22 @@
               </div>
             </div>
             <div class="form-row">
-              <label for="staticEmail" class="col-sm-4 col-form-label text-right">&nbsp;</label>
-              <div class="form-group col-md-6">
-                <div style="max-height: 400px; width: 100%">
-                  <div id="map"></div>
-                </div>
+              <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Time</label>
+              <div class="form-group col-md-2">
+                <input type="text" name="pickuptime" class="form-control time-only" id="pickuptime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
+                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
+                <div class="validation"></div>
               </div>
             </div>
+            <div class="form-row">
+              <label for="staticEmail" class="col-sm-4 col-form-label text-right">Dropoff Time</label>
+              <div class="form-group col-md-2">
+                <input type="text" name="dropofftime" class="form-control time-only" id="dropofftime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
+                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
+                <div class="validation"></div>
+              </div>
+            </div>
+            &nbsp;
             <div class="text-center"><button type="submit" id="submit-book">Continue to Contact Details</button></div>
           </form>
         </div>
@@ -106,124 +124,134 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('#sameas').click(function(){
+    $('#pac-inputs').val($('#pac-input').val());
+  });
+
+  $('.time-only').datepicker({
+      dateFormat: ' ',
+      timepicker: true,
+      classes: 'only-timepicker'
+  });
 });
-function initAutocomplete() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: -6.194618,
-            lng: 106.840006
-        },
-        zoom: 13,
-        mapTypeId: 'roadmap'
-    });
+// function initAutocomplete() {
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//         center: {
+//             lat: -6.194618,
+//             lng: 106.840006
+//         },
+//         zoom: 13,
+//         mapTypeId: 'roadmap'
+//     });
 
-    // Membuat Kotak pencarian terhubung dengan tampilan map
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+//     // Membuat Kotak pencarian terhubung dengan tampilan map
+//     var input = document.getElementById('pac-input');
+//     var searchBox = new google.maps.places.SearchBox(input);
+//     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 
-    var input2 = document.getElementById('pac-inputs');
-    var searchBox2 = new google.maps.places.SearchBox(input2);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input2);
+//     var input2 = document.getElementById('pac-inputs');
+//     var searchBox2 = new google.maps.places.SearchBox(input2);
+//     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input2);
 
-    map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-        searchBox2.setBounds(map.getBounds());
-    });
+//     map.addListener('bounds_changed', function() {
+//         searchBox.setBounds(map.getBounds());
+//         searchBox2.setBounds(map.getBounds());
+//     });
 
-    var markers = [];
-    // Mengaktifkan detail pada suatu tempat ketika pengguna
-    // memilih salah satu dari daftar prediksi tempat 
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+//     var markers = [];
+//     // Mengaktifkan detail pada suatu tempat ketika pengguna
+//     // memilih salah satu dari daftar prediksi tempat 
+//     searchBox.addListener('places_changed', function() {
+//         var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
-            return;
-        }
+//         if (places.length == 0) {
+//             return;
+//         }
 
-        // menghilangkan marker tempat sebelumnya
-        markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
-        markers = [];
+//         // menghilangkan marker tempat sebelumnya
+//         markers.forEach(function(marker) {
+//             marker.setMap(null);
+//         });
+//         markers = [];
 
-        // Untuk setiap tempat, dapatkan icon, nama dan tempat.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
+//         // Untuk setiap tempat, dapatkan icon, nama dan tempat.
+//         var bounds = new google.maps.LatLngBounds();
+//         places.forEach(function(place) {
+//             if (!place.geometry) {
+//                 console.log("Returned place contains no geometry");
+//                 return;
+//             }
+//             var icon = {
+//                 url: place.icon,
+//                 size: new google.maps.Size(71, 71),
+//                 origin: new google.maps.Point(0, 0),
+//                 anchor: new google.maps.Point(17, 34),
+//                 scaledSize: new google.maps.Size(25, 25)
+//             };
 
-            // Membuat Marker untuk setiap tempat
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
+//             // Membuat Marker untuk setiap tempat
+//             markers.push(new google.maps.Marker({
+//                 map: map,
+//                 icon: icon,
+//                 title: place.name,
+//                 position: place.geometry.location
+//             }));
 
-            if (place.geometry.viewport) {
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
-        });
-        map.fitBounds(bounds);
-    });
+//             if (place.geometry.viewport) {
+//                 bounds.union(place.geometry.viewport);
+//             } else {
+//                 bounds.extend(place.geometry.location);
+//             }
+//         });
+//         map.fitBounds(bounds);
+//     });
 
-    searchBox2.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+//     searchBox2.addListener('places_changed', function() {
+//         var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
-            return;
-        }
+//         if (places.length == 0) {
+//             return;
+//         }
 
-        // menghilangkan marker tempat sebelumnya
-        markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
-        markers = [];
+//         // menghilangkan marker tempat sebelumnya
+//         markers.forEach(function(marker) {
+//             marker.setMap(null);
+//         });
+//         markers = [];
 
-        // Untuk setiap tempat, dapatkan icon, nama dan tempat.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
+//         // Untuk setiap tempat, dapatkan icon, nama dan tempat.
+//         var bounds = new google.maps.LatLngBounds();
+//         places.forEach(function(place) {
+//             if (!place.geometry) {
+//                 console.log("Returned place contains no geometry");
+//                 return;
+//             }
+//             var icon = {
+//                 url: place.icon,
+//                 size: new google.maps.Size(71, 71),
+//                 origin: new google.maps.Point(0, 0),
+//                 anchor: new google.maps.Point(17, 34),
+//                 scaledSize: new google.maps.Size(25, 25)
+//             };
 
-            // Membuat Marker untuk setiap tempat
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
+//             // Membuat Marker untuk setiap tempat
+//             markers.push(new google.maps.Marker({
+//                 map: map,
+//                 icon: icon,
+//                 title: place.name,
+//                 position: place.geometry.location
+//             }));
 
-            if (place.geometry.viewport) {
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
-        });
-        map.fitBounds(bounds);
-    });
-}
+//             if (place.geometry.viewport) {
+//                 bounds.union(place.geometry.viewport);
+//             } else {
+//                 bounds.extend(place.geometry.location);
+//             }
+//         });
+//         map.fitBounds(bounds);
+//     });
+// }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlP9U1OSpTmuF9VuaxWFitgz7gXRSL1M&libraries=places&callback=initAutocomplete"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlP9U1OSpTmuF9VuaxWFitgz7gXRSL1M&libraries=places&callback=initAutocomplete"></script> -->

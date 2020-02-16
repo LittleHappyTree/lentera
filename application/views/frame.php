@@ -32,6 +32,8 @@
 
   <script src="<?=base_url()?>assets/lib/jquery/jquery.min.js"></script>
   <script src="<?=base_url()?>assets/lib/jquery/jquery.number.js"></script>
+  <script src="<?=base_url()?>assets/lib/airdatepicker/js/datepicker.js"></script>
+  <script src="<?=base_url()?>assets/lib/airdatepicker/js/i18n/datepicker.en.js"></script>
   <!-- =======================================================
     Theme Name: TheEvent
     Theme URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
@@ -138,8 +140,6 @@
   <script src="<?=base_url()?>assets/lib/wow/wow.min.js"></script>
   <script src="<?=base_url()?>assets/lib/venobox/venobox.min.js"></script>
   <script src="<?=base_url()?>assets/lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="<?=base_url()?>assets/lib/airdatepicker/js/datepicker.js"></script>
-  <script src="<?=base_url()?>assets/lib/airdatepicker/js/i18n/datepicker.en.js"></script>
   <script src="<?=base_url()?>assets/lib/select2/select2.js"></script>
 
 
