@@ -367,14 +367,14 @@ class Mail extends CI_Controller {
 					          	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
 					          		<tr>
 					          			<td valign="middle" class="logo" style="text-align: center;">
-								            <img src="'.base_url().'assets/img/logo-reverse.png" alt="">
+								            <img src="http://littlehappytree.com/demo/lentera/assets/img/logo-reverse.png" alt="">
 								          </td>
 					          		</tr>
 					          	</table>
 					          </td>
 						      </tr>
 						      <tr>
-					          <td valign="middle" class="hero bg_white" style="background-image: url('.base_url().'assets/img/intro-bg.jpg); background-size: cover; height: 400px;">
+					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-bg_2.jpg); background-size: cover; height: 400px;">
 					          	<div class="overlay"></div>
 					            <table>
 					            	<tr>
