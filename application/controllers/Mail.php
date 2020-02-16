@@ -225,7 +225,7 @@ class Mail extends CI_Controller {
 						left: 0;
 						right: 0;
 						bottom: 0;
-						content: '';
+						content: "";
 						width: 100%;
 						background: #000000;
 						z-index: -1;
@@ -288,7 +288,7 @@ class Mail extends CI_Controller {
 						left: 0;
 						right: 0;
 						bottom: -10px;
-						content: '';
+						content: "";
 						width: 100%;
 						height: 2px;
 						background: #ea168e;
