@@ -176,14 +176,14 @@ class Mail extends CI_Controller {
 					}
 
 					h1,h2,h3,h4,h5,h6{
-						font-family: 'Raleway', sans-serif;
+						font-family: "Raleway", sans-serif;
 						color: #000000;
 						margin-top: 0;
 						font-weight: 800;
 					}
 
 					body{
-						font-family: 'Raleway', sans-serif;
+						font-family: "Raleway", sans-serif;
 						font-weight: 500;
 						font-size: 16px;
 						line-height: 1.8;
@@ -206,7 +206,7 @@ class Mail extends CI_Controller {
 						font-size: 20px;
 						font-weight: 700;
 						text-transform: uppercase;
-						font-family: 'Raleway', sans-serif;
+						font-family: "Raleway", sans-serif;
 						padding-top: 0;
 					}
 
