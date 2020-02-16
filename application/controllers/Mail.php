@@ -34,10 +34,11 @@ class Mail extends CI_Controller {
 
 		$this->load->library('email', $config);
 
+		$message = '<html><body><h2>Ini isi email</h2></body></html>';
 		$this->email->from('wayanaditya@littlehappytree.com', 'Testing Email');
 		$this->email->to('wayanaditya27@yahoo.com');
 		$this->email->subject('Testing Email');
-		$this->email->message('<html><body><h2>Ini isi email</h2></body></html>');
+		$this->email->message($message);
 
 		if($this->email->send()) {
 		   echo 'Email berhasil dikirim';
