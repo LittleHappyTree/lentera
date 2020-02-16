@@ -48,6 +48,7 @@ class Mail extends CI_Controller {
 					    <title>Booking Confirmation</title>
 
 					    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
 					<style>
 					html,
 					body {
@@ -160,12 +161,7 @@ class Mail extends CI_Controller {
 						display: inline-block;
 					}
 					.btn.btn-primary{
-					  background: #f82249;
-					  border: 0;
-					  padding: 6px 22px;
-					  color: #fff;
-					  transition: 0.4s;
-					  border-radius: 50px;
+
 					}
 					.btn.btn-white{
 						border-radius: 5px;
@@ -233,7 +229,6 @@ class Mail extends CI_Controller {
 						width: 100%;
 						background: #000000;
 						z-index: -1;
-					  background: rgba(6, 12, 34, 0.8);
 					}
 
 					.hero .text{
@@ -356,7 +351,9 @@ class Mail extends CI_Controller {
 					}
 
 
-					</style>    
+					</style>
+
+
 					</head>
 
 					<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #222222;">
@@ -371,22 +368,22 @@ class Mail extends CI_Controller {
 					          	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
 					          		<tr>
 					          			<td valign="middle" class="logo" style="text-align: center;">
-								            <img src="http://littlehappytree.com/demo/lentera/assets/img/logo-reverse.png" alt="">
+								            <img src="images/logo-reverse.png" alt="">
 								          </td>
 					          		</tr>
 					          	</table>
 					          </td>
 						      </tr>
 						      <tr>
-					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-bg_2.jpg); background-size: cover; height: 400px;">
-					          	<div class="overlay"></div>
+					          <td valign="middle" class="hero bg_white" style="background-image: url(images/bg_1.jpg); background-size: cover; height: 400px;">
+					          	<div class="overlay" style="background: rgba(6, 12, 34, 0.8);"></div>
 					            <table>
 					            	<tr>
 					            		<td>
-					            			<div class="text" style="padding: 0 4em; text-align: center;">
+					            			<div class="text" style="padding: 0 4em; text-align: center; color:#fff">
 					            				<h2 style="font-weight: bold">ORDER <span style="color: #f82249;">CONFIRMATION</span></h2>
 					            				<p>Hi <span style="color: #f82249;"><b>Ruben Kowalski</b></span>, thank you for booking on Lentera Travel. There is one more step to complete your booking, please click Confirm by Whatsapp button on below.</p>
-					            				<p><a href="http://littlehappytree.com/demo/lentera/mail/success" class="btn btn-primary">Confirm by Whatsapp</a></p>
+					            				<p><a href="#" style="  background: #f82249; border: 0; padding: 6px 22px; color: #fff; transition: 0.4s; border-radius: 50px;" class="btn btn-primary">Confirm by Whatsapp</a></p>
 					            			</div>
 					            		</td>
 					            	</tr>
