@@ -23,6 +23,10 @@ class Mail extends CI_Controller {
 		redirect('en','refresh');
 	}
 
+	function success(){
+		echo 'confirmed';
+	}
+
 	function send(){
 		$config['mailtype'] = 'html';
 		$config['protocol'] = 'smtp';
@@ -382,7 +386,7 @@ class Mail extends CI_Controller {
 					            			<div class="text" style="padding: 0 4em; text-align: center;">
 					            				<h2 style="font-weight: bold">ORDER <span style="color: #f82249;">CONFIRMATION</span></h2>
 					            				<p>Hi <span style="color: #f82249;"><b>Ruben Kowalski</b></span>, thank you for booking on Lentera Travel. There is one more step to complete your booking, please click Confirm by Whatsapp button on below.</p>
-					            				<p><a href="#" class="btn btn-primary">Confirm by Whatsapp</a></p>
+					            				<p><a href="http://littlehappytree.com/demo/lentera/mail/success" class="btn btn-primary">Confirm by Whatsapp</a></p>
 					            			</div>
 					            		</td>
 					            	</tr>
