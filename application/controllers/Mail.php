@@ -417,7 +417,7 @@ class Mail extends CI_Controller {
 					</html>
     ';
 		$this->email->from('wayanaditya@littlehappytree.com', 'Testing Email');
-		$this->email->to('wayanaditya27@yahoo.com','wayanaditya27@gmail.com');
+		$this->email->to('wayanaditya27@gmail.com','wayanaditya27@yahoo.com');
 		$this->email->subject('Testing Email');
 		$this->email->message($message);
 		$this->email->set_mailtype("html");
