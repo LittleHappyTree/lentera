@@ -39,6 +39,7 @@ class Mail extends CI_Controller {
 		$this->email->to('wayanaditya27@yahoo.com');
 		$this->email->subject('Testing Email');
 		$this->email->message($message);
+		$this->email->set_mailtype("html");
 
 		if($this->email->send()) {
 		   echo 'Email berhasil dikirim';
