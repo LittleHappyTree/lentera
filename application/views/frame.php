@@ -141,7 +141,8 @@
   <script src="<?=base_url()?>assets/lib/venobox/venobox.min.js"></script>
   <script src="<?=base_url()?>assets/lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="<?=base_url()?>assets/lib/select2/select2.js"></script>
-
+  
+  <script src="<?=base_url()?>assets/contactform/contactform.js"></script>
 
   <!-- Template Main Javascript File -->
   <script src="<?=base_url()?>assets/js/main.js"></script>

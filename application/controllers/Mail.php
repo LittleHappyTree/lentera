@@ -380,7 +380,7 @@ class Mail extends CI_Controller {
 					            <table>
 					            	<tr>
 					            		<td>
-					            			<div class="text" style="padding: 0 4em; text-align: center; color:#fff">
+					            			<div class="text" style="padding: 0 4em; text-align: center; color:#fff !important;">
 					            				<h2 style="font-weight: bold">ORDER <span style="color: #f82249;">CONFIRMATION</span></h2>
 					            				<p>Hi <span style="color: #f82249;"><b>Ruben Kowalski</b></span>, thank you for booking on Lentera Travel. There is one more step to complete your booking, please choose one of two confirm method below.</p>
 							                    <p><a href="#" style="  background: #f82249; border: 0; padding: 6px 22px; color: #fff; transition: 0.4s; border-radius: 50px;" class="btn btn-primary">Confirm by Website</a></p>
@@ -393,7 +393,7 @@ class Mail extends CI_Controller {
 					          </td>
 						      </tr>
 						      <tr>
-							      <td class="bg_white">
+							      <td class="bg_white" style="background: #fff">
 							        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 							          <tr>
 							            <td class="bg_white email-section">

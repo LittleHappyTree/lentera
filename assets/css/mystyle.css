@@ -234,3 +234,78 @@
 #booking .form button[type="submit"]:hover {
   background: #e0072f;
 }
+
+#speakers-details .form #sendmessage {
+  color: #f82249;
+  border: 1px solid #f82249;
+  display: none;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#speakers-details .form #errormessage {
+  color: red;
+  display: none;
+  border: 1px solid red;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+#speakers-details .form #sendmessage.show,
+#speakers-details .form #errormessage.show,
+#speakers-details .form .show {
+  display: block;
+}
+
+#speakers-details .form .validation {
+  color: red;
+  display: none;
+  margin: 0 0 20px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+#speakers-details .form input,
+#speakers-details .form textarea,
+#speakers-details .form select {
+  padding: 10px 14px;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 15px;
+}
+
+#speakers-details .form button[type="submit"] {
+  background: #f82249;
+  border: 0;
+  padding: 10px 40px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#speakers-details .form button:disabled,button[disabled] {
+  cursor: not-allowed;  
+}
+
+#speakers-details .form button[type="submit"]:hover {
+  background: #e0072f;
+}
+
+.my-button {
+  background: #f82249;
+  border: 0;
+  padding: 10px 40px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.my-button:hover {
+  background: #e0072f;
+}

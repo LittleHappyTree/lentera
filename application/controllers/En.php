@@ -65,7 +65,7 @@ class En extends CI_Controller {
 
 	function booking($value="",$id=""){
 		if ($value=='process') {
-			$id = $this->input->post('uid');
+			$bid = $this->input->post('uid');
 			$date = explode(' to ', $this->input->post('date'));
 			$date_start = $this->set_date($date[0]);
 			$date_end = $this->set_date($date[1]);
@@ -76,7 +76,7 @@ class En extends CI_Controller {
 			$pickuptime = ltrim($this->input->post('pickuptime'));
 			$dropofftime = ltrim($this->input->post('dropofftime'));
 			$array = array(
-				"id" => md5($id),
+				"id" => md5($bid),
 				"date_start" => $date_start,
 				"date_end" => $date_end,
 				"time_start" => $pickuptime,
@@ -84,20 +84,32 @@ class En extends CI_Controller {
 				"loc_pickup" => $pickup,
 				"loc_drop" => $dropoff,
 				"order_type" => 'V',
-				"order_number" => $id,
+				"order_number" => $bid,
 				"date_insert" => date('Y-m-d G:i:s')
 			);
 			$this->models->insert('torder',$array);
 			$detail = array(
-				"order_id" => md5($id),
+				"order_id" => md5($bid),
 				"price_id" => $option,
 				"counter"  => '1'
 			);
 			$this->models->insert('torder_detail',$detail);
+			redirect('en/booking/details/'.md5($id));
 		} elseif ($value=='details') {
-			$sql = "SELECT * FROM torder";
+			$data['header'] = 'header-fixed';
+			$data['menu'] = $this->get_menu('N','booking');
+			$data['page'] = 'booking/booking-details';
+			$sql = "SELECT a.* FROM vorder a WHERE id = ?";
+			$data['booking'] = $this->models->openquery($sql,array($id));
+			$sql = "SELECT * FROM vinvoice WHERE order_id = ?";
+			$data['detail'] = $this->models->openquery($sql,array($id));
+			$sql = "SELECT * FROM tcountry ORDER BY id";
+			$data['country'] = $this->models->openquery($sql,null);
+			$this->load->view('frame',$data);
 		} else {
-			$data['id'] = uniqid();
+			$sql = "SELECT * FROM vorder WHERE id = ?";
+			$count = $this->models->countrows($sql,array($id));
+			$data['id'] = ($count>0) ? $id : '';
 			$data['header'] = 'header-fixed';
 			$data['menu'] = $this->get_menu('N','booking');
 			$data['page'] = 'booking/booking';
@@ -112,6 +124,24 @@ class En extends CI_Controller {
 			$date = DateTime::createFromFormat('d/m/Y',$date);
 			return $date->format('Y-m-d');
 		}
+	}
+
+	function unique(){
+		$today = date("ymd");
+		$string     = '';
+	    $vowels     = array(1,2,7,5,3,8,4,9,6,0);  
+	    $consonants = array(
+	        3,4,6,8,9,0,1,5,2,7
+	    );  
+	    srand((double) microtime() * 1000000);
+	    $max = 4/2;
+	    for ($i = 1; $i <= $max; $i++){
+	        $string .= $consonants[rand(0,9)];
+	        $string .= $vowels[rand(0,9)];
+	    }
+	    $sql = "SELECT lpad(count(*) + 1,4,0) num FROM torder a WHERE date(a.date_insert) = ?";
+	    $num = $this->models->getdata($sql,array($this->set_date(date('d/m/Y'))),'num');
+	    return $today.$num.$string;
 	}
 
 	function get_menu($ishome='',$active=''){

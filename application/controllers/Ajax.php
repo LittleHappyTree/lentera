@@ -28,4 +28,11 @@ class Ajax extends CI_Controller {
 		$data = $this->models->openquery($sql,array($id));
 		echo json_encode($data);
 	}
+
+	function get_phcode(){
+		$id = $this->input->post('id');
+		$sql = "SELECT phonecode FROM tcountry WHERE iso = ?";
+		$data = $this->models->getdata($sql,array($id),'phonecode');
+		echo json_encode($data);
+	}
 }

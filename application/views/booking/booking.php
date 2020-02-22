@@ -18,7 +18,7 @@
         </div>
 
         <div class="form">
-          <form action="<?=base_url()?>en/booking/process" method="post" role="form" class="bookingForm">
+          <form action="<?=base_url()?>en/booking/process" method="post" role="form" class="contactForm">
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Date</label>
               <div class="form-group col-md-6">
@@ -37,7 +37,7 @@
                   <optgroup label="Motorcycle">
                   <?php foreach ($vehicle as $value): ?>
                   <?php if ($value->kind=='M'): ?>
-                  <option value="<?=$value->id?>"><?=$value->type_name?> <?=$value->vehicle_series?></option>
+                  <option value="<?=$value->id?>" <?=$retVal = ($value->id=='27') ? 'selected' : ''; ?>><?=$value->type_name?> <?=$value->vehicle_series?></option>
                   <?php endif ?>
                   <?php endforeach ?>
                   </optgroup>
@@ -64,7 +64,7 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Location</label>
               <div class="form-group col-md-6">
-                <input type="text" name="pickup" id="pac-input" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
+                <input type="text" name="pickup" id="pac-input" data-rule="required" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
