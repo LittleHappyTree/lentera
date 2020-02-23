@@ -27,7 +27,7 @@ class Mail extends CI_Controller {
 		echo 'confirmed';
 	}
 
-	function send(){
+	function send($id=''){
 		$config['mailtype'] = 'html';
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'mail.littlehappytree.com';

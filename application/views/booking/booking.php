@@ -18,11 +18,11 @@
         </div>
 
         <div class="form">
-          <form action="<?=base_url()?>en/booking/process" method="post" role="form" class="contactForm">
+          <form action="<?=base_url()?>en/booking/process" method="post" role="form" class="bookingForm">
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Date</label>
               <div class="form-group col-md-6">
-                <input type="text" name="date" class="form-control date-book" id="date" placeholder="Select Date" data-language="en" data-multiple-dates-separator=" to " data-date-format="dd/mm/yyyy" data-range="true" readonly="" style="background: #fff" required="true" />
+                <input type="text" name="date" value="<?=$date?>" class="form-control date-book" id="date" placeholder="Select Date" data-language="en" data-multiple-dates-separator=" to " data-date-format="dd/mm/yyyy" data-range="true" readonly="" style="background: #fff" required="true" />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
@@ -37,14 +37,14 @@
                   <optgroup label="Motorcycle">
                   <?php foreach ($vehicle as $value): ?>
                   <?php if ($value->kind=='M'): ?>
-                  <option value="<?=$value->id?>" <?=$retVal = ($value->id=='27') ? 'selected' : ''; ?>><?=$value->type_name?> <?=$value->vehicle_series?></option>
+                  <option value="<?=$value->id?>" <?=$retVal = ($value->id==$sel_vehicle) ? 'selected' : '';?> ><?=$value->type_name?> <?=$value->vehicle_series?></option>
                   <?php endif ?>
                   <?php endforeach ?>
                   </optgroup>
                   <optgroup label="Car">
                   <?php foreach ($vehicle as $value): ?>
                   <?php if ($value->kind=='C'): ?>
-                  <option value="<?=$value->id?>"><?=$value->type_name?> <?=$value->vehicle_series?></option>
+                  <option value="<?=$value->id?>" <?=$retVal = ($value->id==$sel_vehicle) ? 'selected' : '';?>><?=$value->type_name?> <?=$value->vehicle_series?></option>
                   <?php endif ?>
                   <?php endforeach ?>
                   </optgroup>
@@ -57,6 +57,11 @@
               <div class="form-group col-md-6">
                 <select class="form-control option" name="option" id="option" required>
                   <option value=""></option>
+                  <?php if ($count > 0): ?>
+                    <?php foreach ($option as $values): ?>
+                    <option value="<?=$values->id?>" <?=$op = ($values->id==$sel_option) ? 'selected' : ' ';?>><?=$values->price_name?> <?=$values->price_description?> - IDR <?=number_format($values->price)?> / hour</option>
+                    <?php endforeach ?>
+                  <?php endif ?>
                 </select>
                 <div class="validation"></div>
               </div>
@@ -64,7 +69,7 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Location</label>
               <div class="form-group col-md-6">
-                <input type="text" name="pickup" id="pac-input" data-rule="required" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" />
+                <input type="text" name="pickup" value="<?=$loc_pickup?>" id="pac-input" data-rule="required" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
@@ -73,7 +78,7 @@
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Dropoff Location</label>
               <div class="form-group col-md-6">
                 <input type="checkbox" id="sameas" name="sameas"> Same as Pickup
-                <input type="text" name="dropoff" id="pac-inputs" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
+                <input type="text" name="dropoff" value="<?=$loc_drop?>" id="pac-inputs" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
@@ -81,7 +86,7 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Time</label>
               <div class="form-group col-md-2">
-                <input type="text" name="pickuptime" class="form-control time-only" id="pickuptime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
+                <input type="text" name="pickuptime" value="<?=$time_start?>" class="form-control time-only" id="pickuptime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
@@ -89,7 +94,7 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Dropoff Time</label>
               <div class="form-group col-md-2">
-                <input type="text" name="dropofftime" class="form-control time-only" id="dropofftime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
+                <input type="text" name="dropofftime" value="<?=$time_end?>" class="form-control time-only" id="dropofftime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
                 <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>

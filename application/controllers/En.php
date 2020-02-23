@@ -65,7 +65,7 @@ class En extends CI_Controller {
 
 	function booking($value="",$id=""){
 		if ($value=='process') {
-			$bid = $this->input->post('uid');
+			$bid = ($this->input->post('uid')=='') ? $this->unique() : $this->input->post('uid');
 			$date = explode(' to ', $this->input->post('date'));
 			$date_start = $this->set_date($date[0]);
 			$date_end = $this->set_date($date[1]);
@@ -76,7 +76,6 @@ class En extends CI_Controller {
 			$pickuptime = ltrim($this->input->post('pickuptime'));
 			$dropofftime = ltrim($this->input->post('dropofftime'));
 			$array = array(
-				"id" => md5($bid),
 				"date_start" => $date_start,
 				"date_end" => $date_end,
 				"time_start" => $pickuptime,
@@ -87,18 +86,45 @@ class En extends CI_Controller {
 				"order_number" => $bid,
 				"date_insert" => date('Y-m-d G:i:s')
 			);
-			$this->models->insert('torder',$array);
 			$detail = array(
-				"order_id" => md5($bid),
 				"price_id" => $option,
 				"counter"  => '1'
 			);
-			$this->models->insert('torder_detail',$detail);
-			redirect('en/booking/details/'.md5($id));
+			$arrayid = array(
+				"id" => md5($bid)
+			);
+			$detailarr = array(
+				"order_id" => md5($bid)
+			);
+			if ($bid=='') {
+				$array = array_merge($arrayid,$array);
+				$this->models->insert('torder',$array);
+				$detail = array_merge($detailarr,$detail);
+				$this->models->insert('torder_detail',$detail);
+			} else {
+				$this->models->update('torder',$array,$arrayid);
+				$this->models->update('torder_detail',$detail,$detailarr);
+			}
+			redirect('en/booking/details/'.md5($bid));
+		} elseif ($value=='place') {
+			$array = array(
+				"email" => $this->input->post('email'),
+				"name" => $this->input->post('name'),
+				"phone_code" => $this->input->post('phonecode'),
+				"phone_number" => $this->input->post('phone'),
+				"booking_status" => 'S',
+				"citizenship" => $this->input->post('citizen'),
+				"notes" => $this->input->post('notes')
+			);
+			$where = array(
+				"id" => $this->input->post('id')
+			);
+			$this->models->update('torder',$array,$where);
 		} elseif ($value=='details') {
 			$data['header'] = 'header-fixed';
 			$data['menu'] = $this->get_menu('N','booking');
 			$data['page'] = 'booking/booking-details';
+			$data['id'] = $id;
 			$sql = "SELECT a.* FROM vorder a WHERE id = ?";
 			$data['booking'] = $this->models->openquery($sql,array($id));
 			$sql = "SELECT * FROM vinvoice WHERE order_id = ?";
@@ -107,9 +133,30 @@ class En extends CI_Controller {
 			$data['country'] = $this->models->openquery($sql,null);
 			$this->load->view('frame',$data);
 		} else {
-			$sql = "SELECT * FROM vorder WHERE id = ?";
+			$sql = "SELECT * FROM vorder WHERE id = ? AND booking_status = '' ";
 			$count = $this->models->countrows($sql,array($id));
-			$data['id'] = ($count>0) ? $id : '';
+			$data['count'] = $count;
+			$sqlinvoice = "SELECT * FROM vinvoice WHERE order_id = ?";
+			$data['id'] = ($count > 0) ? $this->models->getdata($sql,array($id),'order_number') : '';
+			$date_start = ($count > 0) ? $this->models->getdata($sql,array($id),'date_start_rev') : '' ;
+			$date_end = ($count > 0) ? $this->models->getdata($sql,array($id),'date_end_rev') : '' ;
+			$data['date'] = ($count > 0) ? $date_start.' to '.$date_end : '';
+			$data['loc_pickup'] = ($count > 0) ? $this->models->getdata($sql,array($id),'loc_pickup') : '' ;
+			$data['loc_drop'] = ($count > 0) ? $this->models->getdata($sql,array($id),'loc_drop') : '' ;
+			$data['time_start'] = ($count > 0) ? $this->models->getdata($sql,array($id),'time_start') : '' ;
+			$data['time_end'] = ($count > 0) ? $this->models->getdata($sql,array($id),'time_end') : '' ;
+			if ($count > 0) {
+				$data['sel_vehicle'] = $this->models->getdata($sqlinvoice,array($id),'vehicle_id');
+				$data['sel_option'] = $this->models->getdata($sqlinvoice,array($id),'id');
+				$sqloption = "SELECT * FROM tprice WHERE vehicle_id = ?";
+				$data['option'] = $this->models->openquery($sqloption,array($data['sel_vehicle']));
+			} else {
+				if (!empty($this->input->post('book_vehicle'))) {
+					$data['sel_vehicle'] = $this->input->post('book_vehicle');
+				} else {
+					$data['sel_vehicle'] = '';
+				}
+			}
 			$data['header'] = 'header-fixed';
 			$data['menu'] = $this->get_menu('N','booking');
 			$data['page'] = 'booking/booking';
@@ -173,5 +220,9 @@ class En extends CI_Controller {
 			)
 		);
 		return $menu;
+	}
+
+	function test(){
+		echo date('Y-m-d h:i:s');
 	}
 }

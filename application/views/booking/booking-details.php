@@ -72,7 +72,8 @@
 
       <div class="form">
           <form action="" method="post" role="form" class="contactForm">
-            <input type="hidden" value="<?=base_url()?>en/booking/placing" id="base_url" readonly>
+            <input type="hidden" value="<?=base_url()?>" id="base_url" readonly>
+            <input type="hidden" value="<?=$id?>" name="bid" readonly>
             <div class="form-row">
               <label for="staticEmail" class="col-sm-2 col-form-label text-right">Email</label>
               <div class="form-group col-md-10">
@@ -114,12 +115,12 @@
             <div class="form-row">
               <label for="staticEmail" class="col-sm-2 col-form-label text-right">Notes</label>
               <div class="form-group col-md-10">
-                <textarea class="form-control" name="message" rows="5" data-msg="Please write something for us" placeholder="Notes"></textarea>
+                <textarea class="form-control" name="notes" rows="5" data-msg="Please write something for us" placeholder="Notes"></textarea>
               </div>
             </div>
             
             &nbsp;
-            <div class="text-center"><button class="my-button">Change My Booking Details</button>&emsp;<button type="submit">Place My Booking</button></div>
+            <div class="text-center"><button onclick="location.href='<?=base_url()?>en/booking/edit/<?=$id?>'" class="my-button">Change My Booking Details</button>&emsp;<button type="submit">Place My Booking</button></div>
           </form>
         </div>
         
