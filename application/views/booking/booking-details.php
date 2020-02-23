@@ -71,7 +71,7 @@
       </div>
 
       <div class="form">
-          <form action="" method="post" role="form" class="contactForm">
+          <form action="<?=base_url()?>en/booking/place" method="post" role="form" class="bookingForm">
             <input type="hidden" value="<?=base_url()?>" id="base_url" readonly>
             <input type="hidden" value="<?=$id?>" name="bid" readonly>
             <div class="form-row">
@@ -120,7 +120,10 @@
             </div>
             
             &nbsp;
-            <div class="text-center"><button onclick="location.href='<?=base_url()?>en/booking/edit/<?=$id?>'" class="my-button">Change My Booking Details</button>&emsp;<button type="submit">Place My Booking</button></div>
+            <div class="text-center">
+              <button style="margin-top: 10px;" onclick="location.href='<?=base_url()?>en/booking/edit/<?=$id?>'" class="my-button">Change My Booking Details</button>&emsp;
+              <button style="margin-top: 10px;" type="submit">Place My Booking</button>
+            </div>
           </form>
         </div>
         

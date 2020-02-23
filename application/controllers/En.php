@@ -64,6 +64,8 @@ class En extends CI_Controller {
 	}
 
 	function booking($value="",$id=""){
+		$data['header'] = 'header-fixed';
+		$data['menu'] = $this->get_menu('N','booking');
 		if ($value=='process') {
 			$bid = ($this->input->post('uid')=='') ? $this->unique() : $this->input->post('uid');
 			$date = explode(' to ', $this->input->post('date'));
@@ -84,7 +86,7 @@ class En extends CI_Controller {
 				"loc_drop" => $dropoff,
 				"order_type" => 'V',
 				"order_number" => $bid,
-				"date_insert" => date('Y-m-d G:i:s')
+				"date_insert" => $this->get_date('now')
 			);
 			$detail = array(
 				"price_id" => $option,
@@ -96,7 +98,7 @@ class En extends CI_Controller {
 			$detailarr = array(
 				"order_id" => md5($bid)
 			);
-			if ($bid=='') {
+			if ($this->input->post('uid')=='') {
 				$array = array_merge($arrayid,$array);
 				$this->models->insert('torder',$array);
 				$detail = array_merge($detailarr,$detail);
@@ -117,12 +119,26 @@ class En extends CI_Controller {
 				"notes" => $this->input->post('notes')
 			);
 			$where = array(
-				"id" => $this->input->post('id')
+				"id" => $this->input->post('bid')
 			);
 			$this->models->update('torder',$array,$where);
+			if ($this->db->affected_rows() > 0){
+				$arraytoken = array(
+					"order_id" => $this->input->post('bid'),
+					"counter" => 1,
+					"token" => $this->token(),
+					"date_expire" => $this->get_date('nowone')
+				);
+				$this->models->insert('torder_link',$arraytoken);
+				if ($this->db->affected_rows() > 0){
+					redirect('en/booking/success');
+				} else {
+					redirect('en/booking/details/'.$this->input->post('bid'));
+				}
+			} else {
+				redirect('en/booking/details/'.$this->input->post('bid'));
+			}
 		} elseif ($value=='details') {
-			$data['header'] = 'header-fixed';
-			$data['menu'] = $this->get_menu('N','booking');
 			$data['page'] = 'booking/booking-details';
 			$data['id'] = $id;
 			$sql = "SELECT a.* FROM vorder a WHERE id = ?";
@@ -131,6 +147,9 @@ class En extends CI_Controller {
 			$data['detail'] = $this->models->openquery($sql,array($id));
 			$sql = "SELECT * FROM tcountry ORDER BY id";
 			$data['country'] = $this->models->openquery($sql,null);
+			$this->load->view('frame',$data);
+		} elseif ($value=='success') {
+			$data['page'] = 'booking/success';
 			$this->load->view('frame',$data);
 		} else {
 			$sql = "SELECT * FROM vorder WHERE id = ? AND booking_status = '' ";
@@ -157,8 +176,6 @@ class En extends CI_Controller {
 					$data['sel_vehicle'] = '';
 				}
 			}
-			$data['header'] = 'header-fixed';
-			$data['menu'] = $this->get_menu('N','booking');
 			$data['page'] = 'booking/booking';
 			$sql = "SELECT * FROM vvehicle_start_price";
 			$data['vehicle'] = $this->models->openquery($sql,null);
@@ -191,6 +208,21 @@ class En extends CI_Controller {
 	    return $today.$num.$string;
 	}
 
+	function token(){
+		$string     = '';
+	    $vowels     = array('q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m','Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M');  
+	    $consonants = array(
+	       'q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m','Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M'
+	    );  
+	    srand((double) microtime() * 1000000);
+	    $max = 32/2;
+	    for ($i = 1; $i <= $max; $i++){
+	        $string .= $consonants[rand(0,51)];
+	        $string .= $vowels[rand(0,51)];
+	    }
+	    return $string;
+	}
+
 	function get_menu($ishome='',$active=''){
 		$menu = array(
 			array(
@@ -220,6 +252,16 @@ class En extends CI_Controller {
 			)
 		);
 		return $menu;
+	}
+
+	function get_date($type){
+		if ($type=='now') {
+			$sql = "SELECT now() now_time FROM dual";
+			return $this->models->getdata($sql,null,'now_time');
+		} elseif ($type=='nowone') {
+			$sql = "SELECT date_add(now(), interval 1 hour) now_time FROM dual";
+			return $this->models->getdata($sql,null,'now_time');
+		}
 	}
 
 	function test(){
