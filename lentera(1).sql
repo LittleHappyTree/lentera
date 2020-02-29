@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2020 at 03:46 AM
+-- Generation Time: Feb 29, 2020 at 01:08 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.1.18
 
@@ -348,9 +348,11 @@ CREATE TABLE `torder` (
 --
 
 INSERT INTO `torder` (`id`, `email`, `name`, `date_start`, `date_end`, `time_start`, `time_end`, `loc_pickup`, `loc_drop`, `discount_id`, `phone_code`, `phone_number`, `booking_status`, `citizenship`, `order_type`, `order_number`, `date_insert`, `notes`) VALUES
-('63c10c65c780491c33da2497dcd3e034', '', '', '2020-02-25', '2020-02-29', '10:00 am', '08:00 pm', 'Vila Bogor Indah', 'Vila Bogor Indah', '', '', '', '', '', 'V', '20022200013137', '2020-02-22 04:30:25', ''),
+('63c10c65c780491c33da2497dcd3e034', '', '', '2020-02-24', '2020-02-29', '10:00 am', '08:00 pm', 'Vila Bogor Indah edit', 'Vila Bogor Indah edit', '', '', '', '', '', 'V', '20022200013137', '2020-02-23 11:46:58', ''),
 ('6c77b97b92ea2097633c4b5f84325ec7', '', '', '2020-02-15', '2020-02-18', '08:00 am', '10:00 am', 'Hotel Aston Martin', 'Hotel Aston Martin', '', '', '', '', '', 'V', '5e47e7edab2eb', '2020-02-15 13:47:13', ''),
-('7b8da6e04633471cb324cc9fde948ae7', '', '', '2020-02-29', '2020-03-01', '09:00 am', '07:00 pm', 'Warung Jambu', 'Warung Jambu', '', '', '', '', '', 'V', '20022200026735', '2020-02-22 04:33:10', '');
+('7b8da6e04633471cb324cc9fde948ae7', '', '', '2020-02-29', '2020-03-01', '09:00 am', '07:00 pm', 'Warung Jambu', 'Warung Jambu', '', '', '', '', '', 'V', '20022200026735', '2020-02-22 04:33:10', ''),
+('96adad43df8c3c3b31a29b19524502a9', 'wayanaditya27@gmail.com', 'Wayan Aditya', '2020-02-29', '2020-03-06', '09:00 am', '04:00 pm', 'Hotel Kuningan', 'Hotel Kuningan', '', '62', '8568942568', 'S', 'ID', 'V', '20022300025005', '2020-02-23 14:02:03', ''),
+('e445499a6831150c3b1a050bed7d9960', 'wayanaditya27@gmail.com', 'Wayan Aditya', '2020-02-25', '2020-02-29', '03:00 am', '03:00 pm', 'Bandara Ngurah Rai 2', 'Bandara Ngurah Rai 2', '', '60', '8568942568', 'S', 'MY', 'V', '20022300033672', '2020-02-23 21:07:04', '');
 
 -- --------------------------------------------------------
 
@@ -383,9 +385,11 @@ CREATE TABLE `torder_detail` (
 --
 
 INSERT INTO `torder_detail` (`order_id`, `price_id`, `counter`) VALUES
-('63c10c65c780491c33da2497dcd3e034', 31, 1),
+('63c10c65c780491c33da2497dcd3e034', 24, 1),
 ('6c77b97b92ea2097633c4b5f84325ec7', 17, 1),
-('7b8da6e04633471cb324cc9fde948ae7', 36, 1);
+('7b8da6e04633471cb324cc9fde948ae7', 36, 1),
+('96adad43df8c3c3b31a29b19524502a9', 1, 1),
+('e445499a6831150c3b1a050bed7d9960', 57, 1);
 
 -- --------------------------------------------------------
 
@@ -399,6 +403,14 @@ CREATE TABLE `torder_link` (
   `token` varchar(32) DEFAULT NULL,
   `date_expire` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `torder_link`
+--
+
+INSERT INTO `torder_link` (`order_id`, `counter`, `token`, `date_expire`) VALUES
+('96adad43df8c3c3b31a29b19524502a9', 1, 'FTkhGNrVbGfqoJFSoHTEkrJKMURmpPkp', '2020-02-23 03:45:10'),
+('e445499a6831150c3b1a050bed7d9960', 1, 'qmxMhfMvMZfqXEJOFDVMwVyZAOSEZKuh', '2020-02-23 22:10:59');
 
 -- --------------------------------------------------------
 
@@ -701,6 +713,22 @@ CREATE TABLE `vorder` (
 ,`days` int(7)
 ,`date_start_for` varchar(72)
 ,`date_end_for` varchar(72)
+,`date_start_rev` varchar(10)
+,`date_end_rev` varchar(10)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vorder_expire`
+-- (See below for the actual view)
+--
+CREATE TABLE `vorder_expire` (
+`order_id` varchar(32)
+,`counter` int(11)
+,`token` varchar(32)
+,`date_expire` datetime
+,`hour_diff` bigint(21)
 );
 
 -- --------------------------------------------------------
@@ -754,7 +782,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder`  AS  select `a`.`id` AS `id`,`a`.`email` AS `email`,`a`.`name` AS `name`,`a`.`date_start` AS `date_start`,`a`.`date_end` AS `date_end`,`a`.`time_start` AS `time_start`,`a`.`time_end` AS `time_end`,`a`.`loc_pickup` AS `loc_pickup`,`a`.`loc_drop` AS `loc_drop`,`a`.`discount_id` AS `discount_id`,`a`.`phone_code` AS `phone_code`,`a`.`phone_number` AS `phone_number`,`a`.`booking_status` AS `booking_status`,`a`.`citizenship` AS `citizenship`,`a`.`order_type` AS `order_type`,`a`.`order_number` AS `order_number`,`a`.`date_insert` AS `date_insert`,`a`.`notes` AS `notes`,(to_days(`a`.`date_end`) - to_days(`a`.`date_start`)) AS `days`,date_format(`a`.`date_start`,'%d %M %Y') AS `date_start_for`,date_format(`a`.`date_end`,'%d %M %Y') AS `date_end_for` from `torder` `a` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder`  AS  select `a`.`id` AS `id`,`a`.`email` AS `email`,`a`.`name` AS `name`,`a`.`date_start` AS `date_start`,`a`.`date_end` AS `date_end`,`a`.`time_start` AS `time_start`,`a`.`time_end` AS `time_end`,`a`.`loc_pickup` AS `loc_pickup`,`a`.`loc_drop` AS `loc_drop`,`a`.`discount_id` AS `discount_id`,`a`.`phone_code` AS `phone_code`,`a`.`phone_number` AS `phone_number`,`a`.`booking_status` AS `booking_status`,`a`.`citizenship` AS `citizenship`,`a`.`order_type` AS `order_type`,`a`.`order_number` AS `order_number`,`a`.`date_insert` AS `date_insert`,`a`.`notes` AS `notes`,(to_days(`a`.`date_end`) - to_days(`a`.`date_start`)) AS `days`,date_format(`a`.`date_start`,'%d %M %Y') AS `date_start_for`,date_format(`a`.`date_end`,'%d %M %Y') AS `date_end_for`,date_format(`a`.`date_start`,'%d/%m/%Y') AS `date_start_rev`,date_format(`a`.`date_end`,'%d/%m/%Y') AS `date_end_rev` from `torder` `a` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vorder_expire`
+--
+DROP TABLE IF EXISTS `vorder_expire`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder_expire`  AS  select `a`.`order_id` AS `order_id`,`a`.`counter` AS `counter`,`a`.`token` AS `token`,`a`.`date_expire` AS `date_expire`,timestampdiff(HOUR,`a`.`date_expire`,now()) AS `hour_diff` from `torder_link` `a` ;
 
 -- --------------------------------------------------------
 
