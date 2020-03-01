@@ -393,10 +393,10 @@ class Mail extends CI_Controller {
 						      <tr>
 					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-email-2.jpg); background-size: cover; height: 400px;">
 					          	<div class="overlay" style="background-color: #060c22; opacity: 0.8;"></div>
-					            <table>
+					            <table class="my-white">
 					            	<tr>
 					            		<td>
-					            			<div class="text my-white" style="padding: 0 4em; text-align: center;">
+					            			<div class="text" style="padding: 0 4em; text-align: center;">
 					            				<h2 style="font-weight: bold">ORDER <span style="color: #f82249;">CONFIRMATION</span></h2>
 					            				<p>Hi <span style="color: #f82249;"><b>Ruben Kowalski</b></span>, thank you for booking on Lentera Travel. There is one more step to complete your booking, please choose one of two confirm method below.</p>
 							                    <p><a href="#" style="  background: #f82249; border: 0; padding: 6px 22px; color: #fff; transition: 0.4s; border-radius: 50px;" class="btn btn-primary">Confirm by Website</a></p>
