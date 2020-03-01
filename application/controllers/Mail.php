@@ -345,6 +345,16 @@ class Mail extends CI_Controller {
 						
 					}
 
+					.my-white {
+						color: #fff;
+					}
+
+					@media (prefers-color-scheme: dark) {
+						.my-white {
+							color: #fff;
+						}
+					}
+
 					@media screen and (max-width: 500px) {
 
 
