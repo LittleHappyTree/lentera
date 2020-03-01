@@ -345,15 +345,13 @@ class Mail extends CI_Controller {
 						
 					}
 
-					@media (prefers-color-scheme: light) {
-						.my-white {
-							color: #fff !important;
-						}
+					.my-white {
+						color: #ffffff !important;
 					}
 
 					@media (prefers-color-scheme: dark) {
 						.my-white {
-							color: #fff !important;
+							color: #ffffff !important;
 						}
 					}
 
