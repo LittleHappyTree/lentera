@@ -398,8 +398,10 @@ class Mail extends CI_Controller {
 							          <tr>
 							            <td class="bg_white email-section">
 							            	<div class="heading-section" style="text-align: center; padding: 0 30px;">
-							              	<h2><b>BOOKING DETAILS</b></h2>
-							              	<h4 style="font-weight: 400; margin-top: -30px;">Order number #00000000</h4>
+							              	<h2 style="line-height: 1">
+							              		<b>BOOKING DETAILS</b><br>
+							              		<small style="font-weight: 400; font-size: 18px">Order number #00000000</small>
+							              	</h2>
 							              	<table width="100%">
 							              		<tr>
 							              			<td style="text-align: left; color:#0b1126; font-weight: bold" width="40%">Booking Date <span style="float: right">:</span></td>
@@ -433,6 +435,12 @@ class Mail extends CI_Controller {
 							        </table>
 
 							      </td>
+							    </tr>
+							    <tr>
+							    	<td style="background: transparent; color: #0b1126; padding: 0 20px; text-align: center; line-height: 1">
+							    		<p style="padding: 10px 0;">Lentera Bali Travel</p>
+							    		<small>Copyright &copy; 2020 Lenter Bali Jaya Travel. <br> All rights reserved</small>
+							    	</td>
 							    </tr>
 					      </table>
 
