@@ -436,13 +436,6 @@ class Mail extends CI_Controller {
 
 							      </td>
 							    </tr>
-							    <tr>
-							    	<td style="background: transparent; color: #0b1126; padding: 0 20px; text-align: center; line-height: 1">
-							    		<p style="padding: 10px 0;">Lentera Bali Travel</p>
-							    		<small>Copyright &copy; 2020 Lenter Bali Jaya Travel. <br> All rights reserved</small>
-							    	</td>
-							    	<br>
-							    </tr>
 					      </table>
 
 					    </div>
