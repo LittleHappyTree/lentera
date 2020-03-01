@@ -436,6 +436,15 @@ class Mail extends CI_Controller {
 
 							      </td>
 							    </tr>
+							    <tr>
+							    	<td style="background: transparent; color: #0b1126; text-align: center; line-height: 1">
+							    		<p>Lentera Bali Travel</p>
+							    		<small>Copyright &copy; 2020 Lenter Bali Jaya Travel. <br> All rights reserved</small>
+							    		<br>
+							    		<br>
+							    		<br>
+							    	</td>
+							    </tr>
 					      </table>
 
 					    </div>
