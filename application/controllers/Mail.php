@@ -375,7 +375,7 @@ class Mail extends CI_Controller {
 					          </td>
 						      </tr>
 						      <tr>
-					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-email.jpg); background-size: cover; height: 400px;">
+					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-email-2.jpg); background-size: cover; height: 400px;">
 					          	<div class="overlay" style="background-color: #060c22; opacity: 0.8;"></div>
 					            <table>
 					            	<tr>
