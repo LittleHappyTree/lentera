@@ -375,7 +375,7 @@ class Mail extends CI_Controller {
 					          </td>
 						      </tr>
 						      <tr>
-					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-email-2.jpg); background-size: cover; height: 400px;">
+					          <td valign="middle" class="hero bg_white" style="background-image: url(http://littlehappytree.com/demo/lentera/assets/img/intro-email.jpg); background-size: cover; height: 400px;">
 					          	<div class="overlay" style="background-color: #060c22; opacity: 0.8;"></div>
 					            <table>
 					            	<tr>
@@ -441,10 +441,6 @@ class Mail extends CI_Controller {
 							    		<p style="padding: 10px 0;">Lentera Bali Travel</p>
 							    		<small>Copyright &copy; 2020 Lenter Bali Jaya Travel. <br> All rights reserved</small>
 							    	</td>
-							    	<br>
-							    	<br>
-							    	<br>
-							    	<br>
 							    	<br>
 							    </tr>
 					      </table>
