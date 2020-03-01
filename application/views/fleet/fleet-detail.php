@@ -47,7 +47,14 @@
               </table>
             </div>
             <br>
-            <a href="" class="book">Book Now</a>
+            <?php $msg = 'Hi there, i would like to book '.$value->type_name.' '.$value->vehicle_series.' .';
+                  $msg = str_replace(' ', '%20', $msg);
+            ?>
+            <form method="post" role="form" action="<?=base_url()?>en/booking">
+            <input type="hidden" name="book-vehicle" value="<?=$value->id?>">
+            <button type="submit">Book</button>&nbsp;
+            <button type="button" class="my-button-small" onclick="location.href='https://api.whatsapp.com/send?phone=6281246364437&text=<?=$msg?>'" ><i class="fa fa-whatsapp"></i> Chat</button>
+            </form>
           </div>
         </div>
         <?php endforeach ?>

@@ -144,4 +144,8 @@ jQuery(document).ready(function( $ ) {
 
 // custom code
 
+  $("#submit-book").click(function(){
+    document.getElementById("bookform").submit();
+  });
+
 });

@@ -16,7 +16,6 @@
           <h2>Booking</h2>
           <p>Minimum booking date is 2 days</p>
         </div>
-
         <div class="form">
           <form action="<?=base_url()?>en/booking/process" method="post" role="form" class="bookingForm">
             <div class="form-row">
@@ -56,8 +55,7 @@
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Select Option</label>
               <div class="form-group col-md-6">
                 <select class="form-control option" name="option" id="option" required>
-                  <option value=""></option>
-                  <?php if ($count > 0): ?>
+                  <?php if (!empty($sel_vehicle)): ?>
                     <?php foreach ($option as $values): ?>
                     <option value="<?=$values->id?>" <?=$op = ($values->id==$sel_option) ? 'selected' : ' ';?>><?=$values->price_name?> <?=$values->price_description?> - IDR <?=number_format($values->price)?> / hour</option>
                     <?php endforeach ?>
@@ -70,7 +68,6 @@
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Location</label>
               <div class="form-group col-md-6">
                 <input type="text" name="pickup" value="<?=$loc_pickup?>" id="pac-input" data-rule="required" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" />
-                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
             </div>
@@ -79,7 +76,6 @@
               <div class="form-group col-md-6">
                 <input type="checkbox" id="sameas" name="sameas"> Same as Pickup
                 <input type="text" name="dropoff" value="<?=$loc_drop?>" id="pac-inputs" class="form-control gsearch" placeholder="Search for Hotel, Places, Airport or Landmark" style="background: #fff" required />
-                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
             </div>
@@ -87,7 +83,6 @@
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Pickup Time</label>
               <div class="form-group col-md-2">
                 <input type="text" name="pickuptime" value="<?=$time_start?>" class="form-control time-only" id="pickuptime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
-                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
             </div>
@@ -95,7 +90,6 @@
               <label for="staticEmail" class="col-sm-4 col-form-label text-right">Dropoff Time</label>
               <div class="form-group col-md-2">
                 <input type="text" name="dropofftime" value="<?=$time_end?>" class="form-control time-only" id="dropofftime" placeholder="Select Pickup Time" data-language="en" readonly="" style="background: #fff" required />
-                <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 <div class="validation"></div>
               </div>
             </div>

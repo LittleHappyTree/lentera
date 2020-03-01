@@ -19,17 +19,18 @@
         <div class="row">
           <div class="col-lg-5">
             <h2>Select Booking Date</h2>
-            <p>Minimum rent is 3 days</p>
+            <p>Minimum rent is 2 days</p>
           </div>
           <div class="col-lg-7">
             <div class="form">
-              <form action="">
+              <form action="<?=base_url()?>en/booking" id="bookform" method="post">
               <div class="form-row">
               <div class="form-group col-md-8">
-                  <input type="text" name="bookdate" class="form-control datepicker-here" data-language="en" data-multiple-dates-separator=" to " data-date-format="dd/mm/yyyy" data-range="true" id="bookdate" placeholder="Click to select date"/>
+                  <input type="text" name="date-book" class="form-control date-book" data-language="en" data-multiple-dates-separator=" to " data-date-format="dd/mm/yyyy" data-range="true" id="bookdate" placeholder="Click to select date"/>
+                  <span id="alert-date" style="color:#f82249"><small id="alert-text"></small></span>
                 </div>
                 <div class="form-group col-md-4">
-                  <button class="btn-trans" type="submit">Find your ride</button>
+                  <button class="btn-trans" id="submit-book">Find your ride</button>
                 </div>
               </div>
               </form>
@@ -63,7 +64,10 @@
                 <?php $msg = 'Hi there, i would like to book '.$value->type_name.' '.$value->vehicle_series.' motorcycle.';
                       $msg = str_replace(' ', '%20', $msg);
                 ?>
-                <button type="button">Book</button>&nbsp;<button type="button" onclick="location.href='https://api.whatsapp.com/send?phone=6281246364437&text=<?=$msg?>'" ><i class="fa fa-whatsapp"></i> Chat</button>
+                <form method="post" role="form" action="<?=base_url()?>en/booking">
+                <input type="hidden" name="book-vehicle" value="<?=$value->id?>">
+                <button type="submit">Book</button>&nbsp;<button type="button" onclick="location.href='https://api.whatsapp.com/send?phone=6281246364437&text=<?=$msg?>'" ><i class="fa fa-whatsapp"></i> Chat</button>
+                </form>
               </div>
             </div>
           </div>
@@ -91,7 +95,10 @@
                 <?php $msg = 'Hi there, i would like to book '.$value->type_name.' '.$value->vehicle_series.' car.';
                       $msg = str_replace(' ', '%20', $msg);
                 ?>
-                <button type="button">Book</button>&nbsp;<button type="button" onclick="location.href='https://api.whatsapp.com/send?phone=6281246364437&text=<?=$msg?>'" ><i class="fa fa-whatsapp"></i> Chat</button>
+                <form method="post" role="form" action="<?=base_url()?>en/booking">
+                <input type="hidden" name="book-vehicle" value="<?=$value->id?>">
+                <button type="submit">Book</button>&nbsp;<button type="button" onclick="location.href='https://api.whatsapp.com/send?phone=6281246364437&text=<?=$msg?>'" ><i class="fa fa-whatsapp"></i> Chat</button>
+                </form>
               </div>
             </div>
           </div>

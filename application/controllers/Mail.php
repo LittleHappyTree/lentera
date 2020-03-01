@@ -398,8 +398,34 @@ class Mail extends CI_Controller {
 							          <tr>
 							            <td class="bg_white email-section">
 							            	<div class="heading-section" style="text-align: center; padding: 0 30px;">
-							              	<h2>Booking Details</h2>
-							              	<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+							              	<h2><b>BOOKING DETAILS</b></h2>
+							              	<h4 style="font-weight: 400; margin-top: -30px;">Order number #00000000</h4>
+							              	<table width="100%">
+							              		<tr>
+							              			<td style="text-align: left; color:#0b1126; font-weight: bold" width="40%">Booking Date <span style="float: right">:</span></td>
+							              			<td style="text-align: left; color:#0b1126" width="60%">Booking Date</td>
+							              		</tr>
+							              		<tr>
+							              			<td style="text-align: left; color:#0b1126; font-weight: bold" width="40%">Booking Date <span style="float: right">:</span></td>
+							              			<td style="text-align: left; color:#0b1126" width="60%">Booking Date</td>
+							              		</tr>
+
+							              		<tr style="vertical-align: top">
+							              			<td style="text-align: left; color:#0b1126; font-weight: bold" width="40%">Order Description <span style="float: right">:</span></td>
+							              			<td style="text-align: left; color:#0b1126" width="60%">
+							              				<table width="100%">
+							              					<tr>
+							              						<td width="70%" style="line-height: 1">Daihatsu Ayla <br> <small><i>MT Self Drive</i></small> </td>
+							              						<td width="30%">200.000</td>
+							              					</tr>
+							              					<tr style="border-top: solid 1px #0b1126;">
+							              						<td width="70%" style="line-height: 1; text-align: center">Total   </td>
+							              						<td width="30%">200.000</td>
+							              					</tr>
+							              				</table>
+							              			</td>
+							              		</tr>
+							              	</table>
 							            	</div>
 							            	
 							            </td>

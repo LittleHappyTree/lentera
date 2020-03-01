@@ -98,7 +98,7 @@
     padding-bottom: 15px;
 }
 
-#speakers button[type="button"] {
+#speakers button[type="button"],button[type="submit"] {
     background: #f82249;
     border: 0;
     padding: 6px 22px;
@@ -108,7 +108,7 @@
     cursor: pointer;
 }
   
-#speakers button[type="button"]:hover {
+#speakers button[type="button"],button[type="submit"]:hover {
     background: #e0072f;
 }
 
@@ -296,6 +296,16 @@
   background: #e0072f;
 }
 
+.speakers {
+  background: #f82249;
+  border: 0;
+  padding: 10px 40px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
 .my-button {
   background: #f82249;
   border: 0;
@@ -308,4 +318,14 @@
 
 .my-button:hover {
   background: #e0072f;
+}
+
+.my-button-small {
+  background: #f82249;
+  border: 0;
+  padding: 5px 20px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+  cursor: pointer;
 }

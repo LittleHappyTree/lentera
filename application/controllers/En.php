@@ -160,6 +160,7 @@ class En extends CI_Controller {
 			$date_start = ($count > 0) ? $this->models->getdata($sql,array($id),'date_start_rev') : '' ;
 			$date_end = ($count > 0) ? $this->models->getdata($sql,array($id),'date_end_rev') : '' ;
 			$data['date'] = ($count > 0) ? $date_start.' to '.$date_end : '';
+			$data['date'] = (!empty($this->input->post('date-book'))) ? $this->input->post('date-book') : $data['date'];
 			$data['loc_pickup'] = ($count > 0) ? $this->models->getdata($sql,array($id),'loc_pickup') : '' ;
 			$data['loc_drop'] = ($count > 0) ? $this->models->getdata($sql,array($id),'loc_drop') : '' ;
 			$data['time_start'] = ($count > 0) ? $this->models->getdata($sql,array($id),'time_start') : '' ;
@@ -170,8 +171,11 @@ class En extends CI_Controller {
 				$sqloption = "SELECT * FROM tprice WHERE vehicle_id = ?";
 				$data['option'] = $this->models->openquery($sqloption,array($data['sel_vehicle']));
 			} else {
-				if (!empty($this->input->post('book_vehicle'))) {
-					$data['sel_vehicle'] = $this->input->post('book_vehicle');
+				if (!empty($this->input->post('book-vehicle'))) {
+					$data['sel_vehicle'] = $this->input->post('book-vehicle');
+					$data['sel_option'] = '';
+					$sqloption = "SELECT * FROM tprice WHERE vehicle_id = ?";
+					$data['option'] = $this->models->openquery($sqloption,array($data['sel_vehicle']));
 				} else {
 					$data['sel_vehicle'] = '';
 				}
