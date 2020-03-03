@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 29, 2020 at 01:08 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.1.18
+-- Generation Time: Mar 03, 2020 at 02:05 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -715,6 +715,7 @@ CREATE TABLE `vorder` (
 ,`date_end_for` varchar(72)
 ,`date_start_rev` varchar(10)
 ,`date_end_rev` varchar(10)
+,`country` varchar(80)
 );
 
 -- --------------------------------------------------------
@@ -773,7 +774,7 @@ CREATE TABLE `vvehicle_start_price` (
 --
 DROP TABLE IF EXISTS `vinvoice`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vinvoice`  AS  select `a`.`order_id` AS `order_id`,`b`.`id` AS `id`,`b`.`vehicle_id` AS `vehicle_id`,`b`.`price_name` AS `price_name`,`b`.`price` AS `price`,`b`.`duration` AS `duration`,`b`.`addon_price_id` AS `addon_price_id`,`b`.`price_type` AS `price_type`,`b`.`price_description` AS `price_description`,`c`.`vehicle_type_id` AS `vehicle_type_id`,`c`.`vehicle_series` AS `vehicle_series`,`d`.`type_name` AS `type_name`,(to_days(`e`.`date_end`) - to_days(`e`.`date_start`)) AS `ndays` from ((((`torder_detail` `a` join `tprice` `b`) join `tvehicle` `c`) join `tvehicle_type` `d`) join `torder` `e`) where ((`a`.`price_id` = `b`.`id`) and (`b`.`vehicle_id` = `c`.`id`) and (`c`.`vehicle_type_id` = `d`.`id`) and (`a`.`order_id` = `e`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vinvoice`  AS  select `a`.`order_id` AS `order_id`,`b`.`id` AS `id`,`b`.`vehicle_id` AS `vehicle_id`,`b`.`price_name` AS `price_name`,`b`.`price` AS `price`,`b`.`duration` AS `duration`,`b`.`addon_price_id` AS `addon_price_id`,`b`.`price_type` AS `price_type`,`b`.`price_description` AS `price_description`,`c`.`vehicle_type_id` AS `vehicle_type_id`,`c`.`vehicle_series` AS `vehicle_series`,`d`.`type_name` AS `type_name`,to_days(`e`.`date_end`) - to_days(`e`.`date_start`) AS `ndays` from ((((`torder_detail` `a` join `tprice` `b`) join `tvehicle` `c`) join `tvehicle_type` `d`) join `torder` `e`) where `a`.`price_id` = `b`.`id` and `b`.`vehicle_id` = `c`.`id` and `c`.`vehicle_type_id` = `d`.`id` and `a`.`order_id` = `e`.`id` ;
 
 -- --------------------------------------------------------
 
@@ -782,7 +783,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder`  AS  select `a`.`id` AS `id`,`a`.`email` AS `email`,`a`.`name` AS `name`,`a`.`date_start` AS `date_start`,`a`.`date_end` AS `date_end`,`a`.`time_start` AS `time_start`,`a`.`time_end` AS `time_end`,`a`.`loc_pickup` AS `loc_pickup`,`a`.`loc_drop` AS `loc_drop`,`a`.`discount_id` AS `discount_id`,`a`.`phone_code` AS `phone_code`,`a`.`phone_number` AS `phone_number`,`a`.`booking_status` AS `booking_status`,`a`.`citizenship` AS `citizenship`,`a`.`order_type` AS `order_type`,`a`.`order_number` AS `order_number`,`a`.`date_insert` AS `date_insert`,`a`.`notes` AS `notes`,(to_days(`a`.`date_end`) - to_days(`a`.`date_start`)) AS `days`,date_format(`a`.`date_start`,'%d %M %Y') AS `date_start_for`,date_format(`a`.`date_end`,'%d %M %Y') AS `date_end_for`,date_format(`a`.`date_start`,'%d/%m/%Y') AS `date_start_rev`,date_format(`a`.`date_end`,'%d/%m/%Y') AS `date_end_rev` from `torder` `a` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder`  AS  select `a`.`id` AS `id`,`a`.`email` AS `email`,`a`.`name` AS `name`,`a`.`date_start` AS `date_start`,`a`.`date_end` AS `date_end`,`a`.`time_start` AS `time_start`,`a`.`time_end` AS `time_end`,`a`.`loc_pickup` AS `loc_pickup`,`a`.`loc_drop` AS `loc_drop`,`a`.`discount_id` AS `discount_id`,`a`.`phone_code` AS `phone_code`,`a`.`phone_number` AS `phone_number`,`a`.`booking_status` AS `booking_status`,`a`.`citizenship` AS `citizenship`,`a`.`order_type` AS `order_type`,`a`.`order_number` AS `order_number`,`a`.`date_insert` AS `date_insert`,`a`.`notes` AS `notes`,to_days(`a`.`date_end`) - to_days(`a`.`date_start`) AS `days`,date_format(`a`.`date_start`,'%d %M %Y') AS `date_start_for`,date_format(`a`.`date_end`,'%d %M %Y') AS `date_end_for`,date_format(`a`.`date_start`,'%d/%m/%Y') AS `date_start_rev`,date_format(`a`.`date_end`,'%d/%m/%Y') AS `date_end_rev`,`b`.`nicename` AS `country` from (`torder` `a` join `tcountry` `b`) where `a`.`citizenship` = `b`.`iso` ;
 
 -- --------------------------------------------------------
 
@@ -791,7 +792,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vorder_expire`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder_expire`  AS  select `a`.`order_id` AS `order_id`,`a`.`counter` AS `counter`,`a`.`token` AS `token`,`a`.`date_expire` AS `date_expire`,timestampdiff(HOUR,`a`.`date_expire`,now()) AS `hour_diff` from `torder_link` `a` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder_expire`  AS  select `a`.`order_id` AS `order_id`,`a`.`counter` AS `counter`,`a`.`token` AS `token`,`a`.`date_expire` AS `date_expire`,timestampdiff(HOUR,`a`.`date_expire`,current_timestamp()) AS `hour_diff` from `torder_link` `a` ;
 
 -- --------------------------------------------------------
 
@@ -800,7 +801,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vprice_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vprice_detail`  AS  select `a`.`id` AS `id`,`a`.`price_name` AS `price_name`,`a`.`price` AS `price`,`a`.`duration` AS `duration`,`a`.`addon_price_id` AS `addon_price_id`,`a`.`price_description` AS `price_description` from `tprice` `a` where (`a`.`addon_price_id` <> 0) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vprice_detail`  AS  select `a`.`id` AS `id`,`a`.`price_name` AS `price_name`,`a`.`price` AS `price`,`a`.`duration` AS `duration`,`a`.`addon_price_id` AS `addon_price_id`,`a`.`price_description` AS `price_description` from `tprice` `a` where `a`.`addon_price_id` <> 0 ;
 
 -- --------------------------------------------------------
 
@@ -809,7 +810,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vvehicle_start_price`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vvehicle_start_price`  AS  select `a`.`id` AS `id`,`a`.`vehicle_series` AS `vehicle_series`,`a`.`year` AS `year`,`a`.`silinder` AS `silinder`,`a`.`capacity` AS `capacity`,`a`.`branch_id` AS `branch_id`,`a`.`img` AS `img`,`a`.`kind` AS `kind`,min(`b`.`price`) AS `start_price`,`c`.`type_name` AS `type_name`,`a`.`description` AS `description` from ((`tvehicle` `a` join `tprice` `b`) join `tvehicle_type` `c`) where ((`a`.`id` = `b`.`vehicle_id`) and (`b`.`addon_price_id` = 0) and (`a`.`vehicle_type_id` = `c`.`id`)) group by `a`.`id`,`a`.`vehicle_type_id`,`a`.`vehicle_series`,`a`.`year`,`a`.`silinder`,`a`.`capacity`,`a`.`branch_id`,`a`.`img`,`a`.`kind` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vvehicle_start_price`  AS  select `a`.`id` AS `id`,`a`.`vehicle_series` AS `vehicle_series`,`a`.`year` AS `year`,`a`.`silinder` AS `silinder`,`a`.`capacity` AS `capacity`,`a`.`branch_id` AS `branch_id`,`a`.`img` AS `img`,`a`.`kind` AS `kind`,min(`b`.`price`) AS `start_price`,`c`.`type_name` AS `type_name`,`a`.`description` AS `description` from ((`tvehicle` `a` join `tprice` `b`) join `tvehicle_type` `c`) where `a`.`id` = `b`.`vehicle_id` and `b`.`addon_price_id` = 0 and `a`.`vehicle_type_id` = `c`.`id` group by `a`.`id`,`a`.`vehicle_type_id`,`a`.`vehicle_series`,`a`.`year`,`a`.`silinder`,`a`.`capacity`,`a`.`branch_id`,`a`.`img`,`a`.`kind` ;
 
 --
 -- Indexes for dumped tables
