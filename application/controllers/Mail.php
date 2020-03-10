@@ -203,12 +203,10 @@ class Mail extends CI_Controller {
 			$this->email->set_mailtype("html");
 	
 			if($this->email->send()) {
-			   echo 'Email berhasil dikirim';
+			   return 'berhasil';
 			}
 			else {
-			   echo 'Email tidak berhasil dikirim';
-			   echo '<br />';
-			   echo $this->email->print_debugger();
+			   return 'gagal';
 			}
 		}
 		
