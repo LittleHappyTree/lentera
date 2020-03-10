@@ -45,8 +45,9 @@
                 <table width="70%">
                   <tbody>
                     <?php $sum=0; foreach ($detail as $key): ?>
+                    <?php $silinder = ($key->kind=="M") ? '- '.$key->silinder.'cc' : '' ; ?>
                     <tr style="border-bottom: 1px #dee2e6 solid">
-                      <td width="50%"><?=$key->type_name?> <?=$key->vehicle_series?> - <?=$key->silinder?>cc<br><small>&emsp;<i><?=$key->price_name?> <?=$key->price_description?> / <?=$key->duration?> hour</i></small></td>
+                      <td width="50%"><?=$key->type_name?> <?=$key->vehicle_series?> <?=$silinder?><br><small>&emsp;<i><?=$key->price_name?> <?=$key->price_description?> / <?=$key->duration?> hour</i></small></td>
                       <td width="50%" class="text-right" style="vertical-align: center;">IDR <?=number_format($key->price)?></td>
                     </tr>
                     <?php $sum += $sum + $key->price; endforeach ?>

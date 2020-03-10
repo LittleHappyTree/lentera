@@ -94,7 +94,7 @@ class Mail extends CI_Controller {
 									<table width="100%">';
 			$ttl_price = 0;
 			foreach ($invoice as $keys) {
-				$silinder = '- '.($key->kind=="M") ? $key->silinder : '';
+				$silinder = ($key->kind=="M") ? '- '.$key->silinder.'cc' : '';
 				$order_detail .= 	'<tr>
 										<td width="70%" style="line-height: 1">'.$keys->type_name.' '.$keys->vehicle_series.' '.$silinder.'<br> <small><i>'.$keys->price_name.' '.$keys->price_description.'</i></small> </td>
 										<td width="30%">'.number_format($keys->price).'</td>
