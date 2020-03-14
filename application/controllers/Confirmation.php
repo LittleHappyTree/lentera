@@ -41,7 +41,7 @@ class Confirmation extends CI_Controller {
 						$this->models->update('torder',$arrayupdate,$arrayid);
 						if ($this->db->affected_rows() > 0) {
 							$this->send($id);
-							redirect('en/booking/confsuccess','refresh')
+							redirect('en/booking/confsuccess','refresh');
 						} else {
 							redirect('en','refresh');
 						}
