@@ -96,7 +96,7 @@ class Confirmation extends CI_Controller {
 				$ttl_price = $ttl_price + $keys->price;
 			}
 
-			$text = 'Hi there i would like to confirm my order with number *'.$order_number.'*, i am *'.$nama.'* from *'.$country.'*.<br>Here is my details:<br>Email:<br>*'.$email.'*<br>Booking Date:<br>*'.$date_start.' to '.$date_end.' for '.$days.' days*<br>Pickup Location:<br>*'.$loc_pickup.' at '.$time_start.'*<br>Drop Location:<br>*'.$loc_drop.' at '.$time_end.'*<br>Oder Description:<br>'.$detail.'<br>Total for '.$days.'days:<br>*'.number_format($ttl_price * $days).'*';
+			$text = 'Hi there i would like to confirm my order with number *'.$order_number.'*, i am *'.$nama.'* from *'.$country.'*.<br>Here is my details:<br>Email:<br>*'.$email.'*<br>Booking Date:<br>*'.$date_start.' to '.$date_end.' for '.$days.' days*<br>Pickup Location:<br>*'.$loc_pickup.' at '.$time_start.'*<br>Drop Location:<br>*'.$loc_drop.' at '.$time_end.'*<br>Oder Description:<br>'.$detail.'<br>Total for '.$days.' days:<br>*'.number_format($ttl_price * $days).'*';
 			if (!empty($notes)) {
 				$text = $text.'<br>*Notes:<br>'.$notes.'';
 			}
