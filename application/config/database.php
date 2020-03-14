@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '103.6.206.154',
+	'hostname' => 'localhost',
 	'username' => 'bqsxmzei_lentera',
 	'password' => 'LenteratravelisthebestB8',
 	'database' => 'bqsxmzei_lentera',
