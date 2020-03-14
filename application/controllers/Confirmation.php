@@ -46,7 +46,7 @@ class Confirmation extends CI_Controller {
 							redirect('en','refresh');
 						}
 					} elseif($type=='whatsapp') {
-						
+						$this->sendwa($id);
 					} else {
 						redirect('en','refresh');
 					}
@@ -58,6 +58,51 @@ class Confirmation extends CI_Controller {
 			} else {
 				redirect('en/booking/expired','refresh');
 			}	
+		} else {
+			redirect('en','refresh');
+		}
+	}
+
+
+
+	function sendwa($id=''){
+		$sql = 'SELECT * FROM torder_link WHERE order_id = ?';
+		$count = $this->models->countrows($sql,array($id));
+		$sql = 'SELECT * FROM vorder WHERE id = ?';
+		if ($count > 0) {
+			$details 	  = $this->models->openquery($sql,array($id));
+			$nama 		  = $this->models->getdata($sql,array($id),'name');
+			$country 	  = $this->models->getdata($sql,array($id),'country');
+			$date_start	  = $this->models->getdata($sql,array($id),'date_start_for');
+			$date_end	  = $this->models->getdata($sql,array($id),'date_end_for');
+			$days 	 	  = $this->models->getdata($sql,array($id),'days');
+			$loc_pickup	  = $this->models->getdata($sql,array($id),'loc_pickup');
+			$loc_drop	  = $this->models->getdata($sql,array($id),'loc_drop');
+			$time_start	  = $this->models->getdata($sql,array($id),'time_start');
+			$time_end	  = $this->models->getdata($sql,array($id),'time_end');
+			$notes 		  = $this->models->getdata($sql,array($id),'notes');
+			$order_number = $this->models->getdata($sql,array($id),'order_number');
+			$email		  = $this->models->getdata($sql,array($id),'email');
+
+			$sql 		  = 'SELECT * FROM vinvoice WHERE order_id = ?';
+			$invoice 	  = $this->models->openquery($sql,array($id));
+
+			$detail = '';
+
+			$ttl_price = 0;
+			foreach ($invoice as $keys) {
+				$silinder = ($keys->kind=="M") ? '- '.$keys->silinder.'cc' : '';
+				$detail = '*'.$keys->type_name.' '.$keys->vehicle_series.' '.$silinder.' - '.$keys->price_name.' '.$keys->price_description.' '.number_format($keys->price).'*<br>';
+				$ttl_price = $ttl_price + $keys->price;
+			}
+
+			$text = 'Hi there i would like to confirm my order with number *'.$order_number.'*, i am *'.$nama.'* from *'.$country.'*.<br>Here is my details:<br>Email:<br>*'.$email.'*<br>Booking Date:<br>*'.$date_start.' to '.$date_end.' for '.$days.' days*<br>Pickup Location:<br>*'.$loc_pickup.' at '.$time_start.'*<br>Drop Location:<br>*'.$loc_drop.' at '.$time_end.'*<br>Oder Description:<br>'.$detail.'<br>Total for '.$days.'days:<br>*'.number_format($ttl_price * $days).'*';
+			if (!empty($notes)) {
+				$text = $text.'<br>*Notes:<br>'.$notes.'';
+			}
+	        $msg = str_replace(' ', '%20', $text);
+	        $msg = str_replace('<br>', '%0A', $msg);
+			redirect('https://api.whatsapp.com/send?phone=6281246364437&text='.$msg,'refresh');
 		} else {
 			redirect('en','refresh');
 		}
@@ -206,7 +251,7 @@ class Confirmation extends CI_Controller {
 												  <h2 style="line-height: 1">
 													  <b>BOOKING DETAILS</b><br>
 													  <small style="font-weight: 400; font-size: 18px">Order number #'.$order_number.'</small><br>
-													  <span style="font-size: 9pt; font-weight: normal">Please upload your driving license and passport (if you are not from Indonesia) document by reply this email and attach your document.</span>
+													  <span style="font-size: 10pt; font-weight: normal">Please upload your driving license and passport (if you are not from Indonesia) document by reply this email and attach your document.</span>
 												  </h2>
 												  '.$order.'
 												</div>
