@@ -40,7 +40,8 @@ class Confirmation extends CI_Controller {
 						);
 						$this->models->update('torder',$arrayupdate,$arrayid);
 						if ($this->db->affected_rows() > 0) {
-							$this->send($id);	
+							$this->send($id);
+							redirect('en/booking/confsuccess','refresh')
 						} else {
 							redirect('en','refresh');
 						}
@@ -205,7 +206,7 @@ class Confirmation extends CI_Controller {
 												  <h2 style="line-height: 1">
 													  <b>BOOKING DETAILS</b><br>
 													  <small style="font-weight: 400; font-size: 18px">Order number #'.$order_number.'</small><br>
-													  <span style="font-size: 13pt">Please upload your driving license and passport (if you are not from Indonesia) document by reply this email and attach your document.</span>
+													  <span style="font-size: 9pt; font-weight: normal">Please upload your driving license and passport (if you are not from Indonesia) document by reply this email and attach your document.</span>
 												  </h2>
 												  '.$order.'
 												</div>
