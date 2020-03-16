@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2020 at 02:05 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Generation Time: Mar 16, 2020 at 07:51 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.1.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -348,7 +348,10 @@ CREATE TABLE `torder` (
 --
 
 INSERT INTO `torder` (`id`, `email`, `name`, `date_start`, `date_end`, `time_start`, `time_end`, `loc_pickup`, `loc_drop`, `discount_id`, `phone_code`, `phone_number`, `booking_status`, `citizenship`, `order_type`, `order_number`, `date_insert`, `notes`) VALUES
+('33f48cdddf6f0702b56efd66f6c12770', '', '', '2020-03-05', '2020-03-08', '09:00 am', '05:00 pm', 'Bandara Soekarno Hatta', 'Bandara Soekarno Hatta', '', '', '', '', '', 'V', '20030100029903', '2020-03-01 17:51:37', ''),
+('4e66aff91052fb7be1bb79f3e717b7d8', '', '', '2020-03-08', '2020-03-13', '09:00 am', '08:00 pm', 'Hotel Aston Martin', 'Hotel Aston Martin', '', '', '', '', '', 'V', '20030100012642', '2020-03-01 17:31:12', ''),
 ('63c10c65c780491c33da2497dcd3e034', '', '', '2020-02-24', '2020-02-29', '10:00 am', '08:00 pm', 'Vila Bogor Indah edit', 'Vila Bogor Indah edit', '', '', '', '', '', 'V', '20022200013137', '2020-02-23 11:46:58', ''),
+('6c09873aa9ab601cc1f9caab80a507cb', '', '', '2020-03-19', '2020-03-21', '07:00 am', '05:00 pm', 'Bakso Rudal Pak Eko', 'Bakso Rudal Pak Eko', '', '', '', '', '', 'V', '20031600013899', '2020-03-16 13:47:19', ''),
 ('6c77b97b92ea2097633c4b5f84325ec7', '', '', '2020-02-15', '2020-02-18', '08:00 am', '10:00 am', 'Hotel Aston Martin', 'Hotel Aston Martin', '', '', '', '', '', 'V', '5e47e7edab2eb', '2020-02-15 13:47:13', ''),
 ('7b8da6e04633471cb324cc9fde948ae7', '', '', '2020-02-29', '2020-03-01', '09:00 am', '07:00 pm', 'Warung Jambu', 'Warung Jambu', '', '', '', '', '', 'V', '20022200026735', '2020-02-22 04:33:10', ''),
 ('96adad43df8c3c3b31a29b19524502a9', 'wayanaditya27@gmail.com', 'Wayan Aditya', '2020-02-29', '2020-03-06', '09:00 am', '04:00 pm', 'Hotel Kuningan', 'Hotel Kuningan', '', '62', '8568942568', 'S', 'ID', 'V', '20022300025005', '2020-02-23 14:02:03', ''),
@@ -385,7 +388,10 @@ CREATE TABLE `torder_detail` (
 --
 
 INSERT INTO `torder_detail` (`order_id`, `price_id`, `counter`) VALUES
+('33f48cdddf6f0702b56efd66f6c12770', 25, 1),
+('4e66aff91052fb7be1bb79f3e717b7d8', 1, 1),
 ('63c10c65c780491c33da2497dcd3e034', 24, 1),
+('6c09873aa9ab601cc1f9caab80a507cb', 60, 1),
 ('6c77b97b92ea2097633c4b5f84325ec7', 17, 1),
 ('7b8da6e04633471cb324cc9fde948ae7', 36, 1),
 ('96adad43df8c3c3b31a29b19524502a9', 1, 1),
@@ -426,63 +432,66 @@ CREATE TABLE `tprice` (
   `duration` int(11) NOT NULL COMMENT 'in hour',
   `addon_price_id` int(11) NOT NULL,
   `price_type` varchar(1) NOT NULL,
-  `price_description` varchar(30) NOT NULL
+  `price_description` varchar(30) NOT NULL,
+  `min_book` int(11) NOT NULL COMMENT 'in days'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tprice`
 --
 
-INSERT INTO `tprice` (`id`, `vehicle_id`, `price_name`, `price`, `duration`, `addon_price_id`, `price_type`, `price_description`) VALUES
-(1, 1, 'Motorcycle', 60000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(5, 2, 'Motorcycle', 140000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(9, 3, 'AT', 200000, 24, 0, 'V', 'Self Drive'),
-(10, 4, 'Full Day', 500000, 10, 0, 'V', 'Driver + Fuel'),
-(15, 4, 'Dinner Only', 300000, 3, 0, 'V', 'Driver + Fuel'),
-(16, 4, 'Half Day', 375000, 5, 0, 'V', 'Driver + Fuel'),
-(17, 4, 'AT', 275000, 24, 0, 'V', 'Self Drive'),
-(18, 4, 'MT', 225000, 24, 0, 'V', 'Self Drive'),
-(19, 5, 'Full Day', 500000, 10, 0, 'V', 'Driver + Fuel'),
-(20, 5, 'Dinner Only', 300000, 3, 0, 'V', 'Driver + Fuel'),
-(21, 5, 'Half Day', 375000, 5, 0, 'V', 'Driver + Fuel'),
-(22, 5, 'AT', 275000, 24, 0, 'V', 'Self Drive'),
-(23, 5, 'MT', 225000, 24, 0, 'V', 'Self Drive'),
-(24, 6, 'MT', 225000, 24, 0, 'V', 'Self Drive'),
-(25, 7, 'MT', 225000, 24, 0, 'V', 'Self Drive'),
-(26, 8, 'MT', 225000, 24, 0, 'V', 'Self Drive'),
-(27, 9, 'AT', 225000, 24, 0, 'V', 'Self Drive'),
-(28, 10, 'AT', 280000, 24, 0, 'V', 'Self Drive'),
-(29, 11, 'AT', 300000, 24, 0, 'V', 'Self Drive'),
-(30, 12, 'AT', 250000, 24, 0, 'V', 'Self Drive'),
-(31, 13, 'Full Day', 700000, 10, 0, 'V', 'Driver + Fuel'),
-(32, 13, 'Dinner Only', 400000, 3, 0, 'V', 'Driver + Fuel'),
-(33, 13, 'Half Day', 575000, 5, 0, 'V', 'Driver + Fuel'),
-(34, 13, 'AT', 400000, 24, 0, 'V', 'Self Drive'),
-(35, 13, 'MT', 350000, 24, 0, 'V', 'Self Drive'),
-(36, 14, 'Full Day', 850000, 10, 0, 'V', 'Driver + Fuel'),
-(37, 14, 'Dinner Only', 450000, 3, 0, 'V', 'Driver + Fuel'),
-(38, 14, 'Half Day', 600000, 5, 0, 'V', 'Driver + Fuel'),
-(39, 14, 'AT', 550000, 24, 0, 'V', 'Self Drive'),
-(40, 14, 'MT', 500000, 24, 0, 'V', 'Self Drive'),
-(41, 15, 'Full Day', 1350000, 10, 0, 'V', 'Driver + Fuel'),
-(42, 16, 'Full Day', 2100000, 10, 0, 'V', 'Driver + Fuel'),
-(43, 17, 'Full Day', 800000, 10, 0, 'V', 'Driver + Fuel'),
-(44, 17, 'Dinner Only', 500000, 3, 0, 'V', 'Driver + Fuel'),
-(45, 17, 'Half Day', 650000, 5, 0, 'V', 'Driver + Fuel'),
-(46, 18, 'Full Day', 1000000, 10, 0, 'V', 'Driver + Fuel'),
-(47, 18, 'Dinner Only', 550000, 3, 0, 'V', 'Driver + Fuel'),
-(48, 18, 'Half Day', 550000, 5, 0, 'V', 'Driver + Fuel'),
-(49, 19, 'Full Day', 1100000, 10, 0, 'V', 'Driver + Fuel'),
-(50, 19, 'Dinner Only', 700000, 3, 0, 'V', 'Driver + Fuel'),
-(51, 19, 'Half Day', 875000, 5, 0, 'V', 'Driver + Fuel'),
-(52, 20, 'Motorcycle', 60000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(53, 21, 'Motorcycle', 80000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(54, 22, 'Motorcycle', 65000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(55, 23, 'Motorcycle', 90000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(56, 24, 'Motorcycle', 110000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(57, 25, 'Motorcycle', 150000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(58, 27, 'Motorcycle', 150000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat'),
-(59, 26, 'Motorcycle', 300000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat');
+INSERT INTO `tprice` (`id`, `vehicle_id`, `price_name`, `price`, `duration`, `addon_price_id`, `price_type`, `price_description`, `min_book`) VALUES
+(1, 1, 'Motorcycle', 60000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(5, 2, 'Motorcycle', 140000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(9, 3, 'AT', 200000, 24, 0, 'V', 'Self Drive', 2),
+(10, 4, 'Full Day', 500000, 10, 0, 'V', 'Driver + Fuel', 2),
+(15, 4, 'Dinner Only', 300000, 3, 0, 'V', 'Driver + Fuel', 2),
+(16, 4, 'Half Day', 375000, 5, 0, 'V', 'Driver + Fuel', 2),
+(17, 4, 'AT', 275000, 24, 0, 'V', 'Self Drive', 2),
+(18, 4, 'MT', 225000, 24, 0, 'V', 'Self Drive', 2),
+(19, 5, 'Full Day', 500000, 10, 0, 'V', 'Driver + Fuel', 2),
+(20, 5, 'Dinner Only', 300000, 3, 0, 'V', 'Driver + Fuel', 2),
+(21, 5, 'Half Day', 375000, 5, 0, 'V', 'Driver + Fuel', 2),
+(22, 5, 'AT', 275000, 24, 0, 'V', 'Self Drive', 2),
+(23, 5, 'MT', 225000, 24, 0, 'V', 'Self Drive', 2),
+(24, 6, 'MT', 225000, 24, 0, 'V', 'Self Drive', 2),
+(25, 7, 'MT', 225000, 24, 0, 'V', 'Self Drive', 2),
+(26, 8, 'MT', 225000, 24, 0, 'V', 'Self Drive', 2),
+(27, 9, 'AT', 225000, 24, 0, 'V', 'Self Drive', 2),
+(28, 10, 'AT', 280000, 24, 0, 'V', 'Self Drive', 2),
+(29, 11, 'AT', 300000, 24, 0, 'V', 'Self Drive', 2),
+(30, 12, 'AT', 250000, 24, 0, 'V', 'Self Drive', 2),
+(31, 13, 'Full Day', 700000, 10, 0, 'V', 'Driver + Fuel', 2),
+(32, 13, 'Dinner Only', 400000, 3, 0, 'V', 'Driver + Fuel', 2),
+(33, 13, 'Half Day', 575000, 5, 0, 'V', 'Driver + Fuel', 2),
+(34, 13, 'AT', 400000, 24, 0, 'V', 'Self Drive', 2),
+(35, 13, 'MT', 350000, 24, 0, 'V', 'Self Drive', 2),
+(36, 14, 'Full Day', 850000, 10, 0, 'V', 'Driver + Fuel', 2),
+(37, 14, 'Dinner Only', 450000, 3, 0, 'V', 'Driver + Fuel', 2),
+(38, 14, 'Half Day', 600000, 5, 0, 'V', 'Driver + Fuel', 2),
+(39, 14, 'AT', 550000, 24, 0, 'V', 'Self Drive', 2),
+(40, 14, 'MT', 500000, 24, 0, 'V', 'Self Drive', 2),
+(41, 15, 'Full Day', 1350000, 10, 0, 'V', 'Driver + Fuel', 2),
+(42, 16, 'Full Day', 2100000, 10, 0, 'V', 'Driver + Fuel', 2),
+(43, 17, 'Full Day', 800000, 10, 0, 'V', 'Driver + Fuel', 2),
+(44, 17, 'Dinner Only', 500000, 3, 0, 'V', 'Driver + Fuel', 2),
+(45, 17, 'Half Day', 650000, 5, 0, 'V', 'Driver + Fuel', 2),
+(46, 18, 'Full Day', 1000000, 10, 0, 'V', 'Driver + Fuel', 2),
+(47, 18, 'Dinner Only', 550000, 3, 0, 'V', 'Driver + Fuel', 2),
+(48, 18, 'Half Day', 550000, 5, 0, 'V', 'Driver + Fuel', 2),
+(49, 19, 'Full Day', 1100000, 10, 0, 'V', 'Driver + Fuel', 2),
+(50, 19, 'Dinner Only', 700000, 3, 0, 'V', 'Driver + Fuel', 2),
+(51, 19, 'Half Day', 875000, 5, 0, 'V', 'Driver + Fuel', 2),
+(52, 20, 'Motorcycle', 60000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(53, 21, 'Motorcycle', 80000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(54, 22, 'Motorcycle', 65000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(55, 23, 'Motorcycle', 90000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(56, 24, 'Motorcycle', 110000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(57, 25, 'Motorcycle', 150000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(58, 27, 'Motorcycle', 150000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(59, 26, 'Motorcycle', 300000, 24, 0, 'V', 'Include 2 Helmet + 2 Raincoat', 2),
+(60, 28, 'MT', 800000, 24, 0, 'V', 'Self Drive', 3),
+(61, 29, 'AT', 800000, 24, 0, 'V', 'Self Drive', 3);
 
 -- --------------------------------------------------------
 
@@ -614,7 +623,9 @@ INSERT INTO `tvehicle` (`id`, `vehicle_type_id`, `vehicle_series`, `year`, `sili
 (24, 1, 'PCX', '2017', 150, 2, 1, 'pcx.png', 'M', 'Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.'),
 (25, 1, 'CRF', '2017', 150, 2, 1, 'crf.png', 'M', 'Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.'),
 (26, 2, 'XMAX', '2018', 250, 2, 1, 'xmax.png', 'M', 'Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.'),
-(27, 8, 'KLX', '2018', 150, 2, 1, 'klx.png', 'M', 'Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.');
+(27, 8, 'KLX', '2018', 150, 2, 1, 'klx.png', 'M', 'Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.'),
+(28, 9, 'High Roof', '2016', 2300, 4, 1, 'camp-high1.png;camp-high2.png;camp-high3.png;camp-high4.png;camp-high5.png;camp-high6.png;camp-high7.png', 'C', 'A high roof type campervan with a lot of space inside, it will fulfill every things you need in a campervan. Cruise leisurely in the highway, and enjoy the cozy spacious van with everything in it at campsite.<br><br>\r\n<b>Specifications:</b>\r\n<ul style=\"margin-top: -30px;\"><li>Dimension:(L)4915 x (W)1740 x (H)2030 mm</li><li>Engine: Kia Travello 2.7L</li><li>Fuel type: Diesel</li><li>Transmission: Manual 5 Speed</li><li>A/C in front and mid Cabin</li></ul>\r\n<b>Product features:</b>\r\n<ul><li>Sleeping System</li><li>Kitchen Unit</li><li>Camping Set</li><li>E-Power Source</li><li>Entertainment</li><li>Toilet</li></ul>'),
+(29, 9, 'Pop Up Roof', '2016', 2300, 4, 1, 'camp-pop1.png;camp-pop2.png;camp-pop3.png;camp-pop4.png;camp-pop5.png;camp-pop6.png;camp-pop7.png', 'C', 'A pop up roof type of campervan which does not stand out on the road, but got you covered for any basic needs for when you are ready to relax on the campsite.<br>\r\n<b>Specifications</b>\r\n<ul style=\"margin-top: -30px;\"><li>Dimension:(L)5120 x (W)1920 x (H)1940 mm</li><li>Engine: Hyundai H-1 2.4L MPI</li><li>Fuel type: Petrol (down to RON 90)</li><li>Transmission: Automatic</li><li>A/C Cabin</li><li>Parking sensors and Camera</li><li>Navigation System</li></ul>\r\n<b>Product features:</b>\r\n<ul><li>Sleeping System</li><li>Kitchen Unit</li><li>Camoing Set</li><li>E-Power Source</li><li>Entertainment</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -661,7 +672,8 @@ INSERT INTO `tvehicle_type` (`id`, `type_name`) VALUES
 (5, 'Daihatsu'),
 (6, 'Nissan'),
 (7, 'Isuzu'),
-(8, 'Kawasaki');
+(8, 'Kawasaki'),
+(9, 'Campervan');
 
 -- --------------------------------------------------------
 
@@ -678,6 +690,8 @@ CREATE TABLE `vinvoice` (
 ,`duration` int(11)
 ,`addon_price_id` int(11)
 ,`price_type` varchar(1)
+,`silinder` int(4)
+,`kind` varchar(2)
 ,`price_description` varchar(30)
 ,`vehicle_type_id` int(11)
 ,`vehicle_series` varchar(50)
@@ -774,7 +788,7 @@ CREATE TABLE `vvehicle_start_price` (
 --
 DROP TABLE IF EXISTS `vinvoice`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vinvoice`  AS  select `a`.`order_id` AS `order_id`,`b`.`id` AS `id`,`b`.`vehicle_id` AS `vehicle_id`,`b`.`price_name` AS `price_name`,`b`.`price` AS `price`,`b`.`duration` AS `duration`,`b`.`addon_price_id` AS `addon_price_id`,`b`.`price_type` AS `price_type`,`b`.`price_description` AS `price_description`,`c`.`vehicle_type_id` AS `vehicle_type_id`,`c`.`vehicle_series` AS `vehicle_series`,`d`.`type_name` AS `type_name`,to_days(`e`.`date_end`) - to_days(`e`.`date_start`) AS `ndays` from ((((`torder_detail` `a` join `tprice` `b`) join `tvehicle` `c`) join `tvehicle_type` `d`) join `torder` `e`) where `a`.`price_id` = `b`.`id` and `b`.`vehicle_id` = `c`.`id` and `c`.`vehicle_type_id` = `d`.`id` and `a`.`order_id` = `e`.`id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vinvoice`  AS  select `a`.`order_id` AS `order_id`,`b`.`id` AS `id`,`b`.`vehicle_id` AS `vehicle_id`,`b`.`price_name` AS `price_name`,`b`.`price` AS `price`,`b`.`duration` AS `duration`,`b`.`addon_price_id` AS `addon_price_id`,`b`.`price_type` AS `price_type`,`c`.`silinder` AS `silinder`,`c`.`kind` AS `kind`,`b`.`price_description` AS `price_description`,`c`.`vehicle_type_id` AS `vehicle_type_id`,`c`.`vehicle_series` AS `vehicle_series`,`d`.`type_name` AS `type_name`,(to_days(`e`.`date_end`) - to_days(`e`.`date_start`)) AS `ndays` from ((((`torder_detail` `a` join `tprice` `b`) join `tvehicle` `c`) join `tvehicle_type` `d`) join `torder` `e`) where ((`a`.`price_id` = `b`.`id`) and (`b`.`vehicle_id` = `c`.`id`) and (`c`.`vehicle_type_id` = `d`.`id`) and (`a`.`order_id` = `e`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -783,7 +797,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder`  AS  select `a`.`id` AS `id`,`a`.`email` AS `email`,`a`.`name` AS `name`,`a`.`date_start` AS `date_start`,`a`.`date_end` AS `date_end`,`a`.`time_start` AS `time_start`,`a`.`time_end` AS `time_end`,`a`.`loc_pickup` AS `loc_pickup`,`a`.`loc_drop` AS `loc_drop`,`a`.`discount_id` AS `discount_id`,`a`.`phone_code` AS `phone_code`,`a`.`phone_number` AS `phone_number`,`a`.`booking_status` AS `booking_status`,`a`.`citizenship` AS `citizenship`,`a`.`order_type` AS `order_type`,`a`.`order_number` AS `order_number`,`a`.`date_insert` AS `date_insert`,`a`.`notes` AS `notes`,to_days(`a`.`date_end`) - to_days(`a`.`date_start`) AS `days`,date_format(`a`.`date_start`,'%d %M %Y') AS `date_start_for`,date_format(`a`.`date_end`,'%d %M %Y') AS `date_end_for`,date_format(`a`.`date_start`,'%d/%m/%Y') AS `date_start_rev`,date_format(`a`.`date_end`,'%d/%m/%Y') AS `date_end_rev`,`b`.`nicename` AS `country` from (`torder` `a` join `tcountry` `b`) where `a`.`citizenship` = `b`.`iso` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder`  AS  select `a`.`id` AS `id`,`a`.`email` AS `email`,`a`.`name` AS `name`,`a`.`date_start` AS `date_start`,`a`.`date_end` AS `date_end`,`a`.`time_start` AS `time_start`,`a`.`time_end` AS `time_end`,`a`.`loc_pickup` AS `loc_pickup`,`a`.`loc_drop` AS `loc_drop`,`a`.`discount_id` AS `discount_id`,`a`.`phone_code` AS `phone_code`,`a`.`phone_number` AS `phone_number`,`a`.`booking_status` AS `booking_status`,`a`.`citizenship` AS `citizenship`,`a`.`order_type` AS `order_type`,`a`.`order_number` AS `order_number`,`a`.`date_insert` AS `date_insert`,`a`.`notes` AS `notes`,(to_days(`a`.`date_end`) - to_days(`a`.`date_start`)) AS `days`,date_format(`a`.`date_start`,'%d %M %Y') AS `date_start_for`,date_format(`a`.`date_end`,'%d %M %Y') AS `date_end_for`,date_format(`a`.`date_start`,'%d/%m/%Y') AS `date_start_rev`,date_format(`a`.`date_end`,'%d/%m/%Y') AS `date_end_rev`,`b`.`nicename` AS `country` from (`torder` `a` left join `tcountry` `b` on((`a`.`citizenship` = `b`.`iso`))) ;
 
 -- --------------------------------------------------------
 
@@ -792,7 +806,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vorder_expire`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder_expire`  AS  select `a`.`order_id` AS `order_id`,`a`.`counter` AS `counter`,`a`.`token` AS `token`,`a`.`date_expire` AS `date_expire`,timestampdiff(HOUR,`a`.`date_expire`,current_timestamp()) AS `hour_diff` from `torder_link` `a` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vorder_expire`  AS  select `a`.`order_id` AS `order_id`,`a`.`counter` AS `counter`,`a`.`token` AS `token`,`a`.`date_expire` AS `date_expire`,timestampdiff(HOUR,`a`.`date_expire`,now()) AS `hour_diff` from `torder_link` `a` ;
 
 -- --------------------------------------------------------
 
@@ -801,7 +815,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vprice_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vprice_detail`  AS  select `a`.`id` AS `id`,`a`.`price_name` AS `price_name`,`a`.`price` AS `price`,`a`.`duration` AS `duration`,`a`.`addon_price_id` AS `addon_price_id`,`a`.`price_description` AS `price_description` from `tprice` `a` where `a`.`addon_price_id` <> 0 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vprice_detail`  AS  select `a`.`id` AS `id`,`a`.`price_name` AS `price_name`,`a`.`price` AS `price`,`a`.`duration` AS `duration`,`a`.`addon_price_id` AS `addon_price_id`,`a`.`price_description` AS `price_description` from `tprice` `a` where (`a`.`addon_price_id` <> 0) ;
 
 -- --------------------------------------------------------
 
@@ -810,7 +824,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vvehicle_start_price`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vvehicle_start_price`  AS  select `a`.`id` AS `id`,`a`.`vehicle_series` AS `vehicle_series`,`a`.`year` AS `year`,`a`.`silinder` AS `silinder`,`a`.`capacity` AS `capacity`,`a`.`branch_id` AS `branch_id`,`a`.`img` AS `img`,`a`.`kind` AS `kind`,min(`b`.`price`) AS `start_price`,`c`.`type_name` AS `type_name`,`a`.`description` AS `description` from ((`tvehicle` `a` join `tprice` `b`) join `tvehicle_type` `c`) where `a`.`id` = `b`.`vehicle_id` and `b`.`addon_price_id` = 0 and `a`.`vehicle_type_id` = `c`.`id` group by `a`.`id`,`a`.`vehicle_type_id`,`a`.`vehicle_series`,`a`.`year`,`a`.`silinder`,`a`.`capacity`,`a`.`branch_id`,`a`.`img`,`a`.`kind` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vvehicle_start_price`  AS  select `a`.`id` AS `id`,`a`.`vehicle_series` AS `vehicle_series`,`a`.`year` AS `year`,`a`.`silinder` AS `silinder`,`a`.`capacity` AS `capacity`,`a`.`branch_id` AS `branch_id`,`a`.`img` AS `img`,`a`.`kind` AS `kind`,min(`b`.`price`) AS `start_price`,`c`.`type_name` AS `type_name`,`a`.`description` AS `description` from ((`tvehicle` `a` join `tprice` `b`) join `tvehicle_type` `c`) where ((`a`.`id` = `b`.`vehicle_id`) and (`b`.`addon_price_id` = 0) and (`a`.`vehicle_type_id` = `c`.`id`)) group by `a`.`id`,`a`.`vehicle_type_id`,`a`.`vehicle_series`,`a`.`year`,`a`.`silinder`,`a`.`capacity`,`a`.`branch_id`,`a`.`img`,`a`.`kind` ;
 
 --
 -- Indexes for dumped tables
@@ -932,7 +946,7 @@ ALTER TABLE `tcountry`
 -- AUTO_INCREMENT for table `tprice`
 --
 ALTER TABLE `tprice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `ttour`
@@ -956,13 +970,13 @@ ALTER TABLE `ttour_itinerary_detail`
 -- AUTO_INCREMENT for table `tvehicle`
 --
 ALTER TABLE `tvehicle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tvehicle_type`
 --
 ALTER TABLE `tvehicle_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

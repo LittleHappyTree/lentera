@@ -307,7 +307,7 @@
 }
 
 .my-button {
-  background: #f82249;
+  background: #f82249;gallery-carousel
   border: 0;
   padding: 10px 40px;
   color: #fff;
@@ -329,3 +329,25 @@
   border-radius: 50px;
   cursor: pointer;
 }
+
+#gallery {
+  padding: 60px 0;
+}
+
+#gallery .container table {
+  color: #112363;
+  font-size: 15px;
+}
+
+#gallery .container table .title-price{
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#gallery .container table tr td{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+

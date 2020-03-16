@@ -16,7 +16,8 @@
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/<?=$value->img?>" class="img-fluid">
+                <?php $img_file = explode(';', $value->img); ?>
+                <img src="<?=base_url()?>assets/img/motor/<?=$img_file[0]?>" class="img-fluid">
               </div>
               <h3><a href="<?=base_url()?>en/fleet/detail/<?=$value->kind?>/<?=$value->id?>"><?=$value->type_name?> <?=$value->vehicle_series?> </a><br><small><?=$value->silinder?>CC &bull; <?=$value->year?> &bull; <?=$value->capacity?> seat</small></h3>
               <p>Start from IDR <?=number_format($value->start_price,0,',','.')?> / day</p>
@@ -46,7 +47,8 @@
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="<?=base_url()?>assets/img/motor/<?=$value->img?>" class="img-fluid">
+                <?php $img_file = explode(';', $value->img); ?>
+                <img src="<?=base_url()?>assets/img/motor/<?=$img_file[0]?>" class="img-fluid">
               </div>
               <h3><a href="<?=base_url()?>en/fleet/detail/<?=$value->kind?>/<?=$value->id?>"><?=$value->type_name?> <?=$value->vehicle_series?> </a><br><small><?=$value->silinder?>cc &bull; <?=$value->year?> &bull; <?=$value->capacity?> seat</small></h3>
               <p>Start from IDR <?=number_format($value->start_price)?> / day</p>

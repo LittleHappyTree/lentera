@@ -43,6 +43,8 @@ class En extends CI_Controller {
 			$sql = "SELECT * FROM tprice WHERE addon_price_id = ? AND vehicle_id = ?";
 			$data['loadmaster'] = $this->models->openquery($sql,array(0,$id));
 			$data['countmaster'] = $this->models->countrows($sql,array(0,$id));
+			$sql = "SELECT * FROM tvehicle WHERE id = ?";
+			$data['imgtotal'] = $this->models->getdata($sql,array($id),'img');
 			$sql = "SELECT DISTINCT vehicle_id, price_name, price, duration FROM tprice WHERE addon_price_id != ? AND vehicle_id = ?";
 			$data['loaddetail'] = $this->models->openquery($sql,array(0,$id));
 			$data['countdetail'] = $this->models->countrows($sql,array(0,$id));
@@ -282,7 +284,11 @@ class En extends CI_Controller {
 	}
 
 	function test(){
-		echo date('Y-m-d h:i:s');
+		$text = 'asd.jpg;asd.jpg;asd.jpg;asd.jpg;asd.jpg';
+		$newtext = explode(';', $text);
+		echo var_dump($newtext).'<br>';
+		echo count($newtext).'<br>';
+		echo $newtext[0];
 	}
 
 	function send($id=''){
