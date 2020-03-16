@@ -77,7 +77,7 @@
       </div>
       
       <?php foreach ($load as $value): ?>
-      <div class="owl-carousel gallery-carousel" style="padding: 60px">
+      <div class="owl-carousel gallery-carousel" style="padding: 0 60px">
         <?php $gambar = explode(';', $value->img); $jumlah = count($gambar);?>
         <?php for ($i = 0; $i < $jumlah; $i++) {?>
         <a href="<?=base_url()?>assets/img/motor/<?=$gambar[$i]?>" class="venobox" data-gall="gallery-carousel"><img src="<?=base_url()?>assets/img/motor/<?=$gambar[$i]?>" alt=""></a>
